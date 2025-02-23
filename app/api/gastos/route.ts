@@ -8,21 +8,18 @@ export async function GET(request: Request) {
 
   const year = parseInt(yearParam);
   const month = parseInt(monthParam);
-  const formattedMonth = month.toString().padStart(2, '0');
+  const formattedMonth = month.toString().padStart(2, "0");
 
-  // Fix the URL construction
-  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=10&page=1&sidx=invdate&sord=desc`;
 
   try {
     const response = await fetch(url, {
       headers: {
-        'Accept': 'application/xml',
-        'Content-Type': 'application/xml',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+        "Accept": "application/xml",
+        "Content-Type": "application/xml",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
       },
-      next: { 
-        revalidate: 3600
-      }
+      next: { revalidate: 3600 }, // Cache por 1 hora
     });
 
     if (!response.ok) {
@@ -31,19 +28,16 @@ export async function GET(request: Request) {
 
     const xmlText = await response.text();
     if (!xmlText || xmlText.trim().length === 0) {
-      throw new Error('Received empty response from server');
+      throw new Error("Received empty response from server");
     }
 
-    console.log('Received XML data length:', xmlText.length);
-    
+    // Optimizar el parsing
     const parser = new XMLParser({
-      ignoreAttributes: false,
-      parseAttributeValue: true
+      ignoreAttributes: true, // Ignorar atributos para acelerar
+      parseTagValue: false,  // No procesar valores innecesarios
     });
-    
     const jsonData = parser.parse(xmlText);
-    console.log('Parsed JSON data structure:', Object.keys(jsonData));
-    
+
     const rows = jsonData.rows?.row || [];
     const data = (Array.isArray(rows) ? rows : [rows]).map((row: any) => ({
       jurisdiccion: row.cell[0] || "Sin Jurisdicción",
@@ -55,30 +49,27 @@ export async function GET(request: Request) {
       contribucionesPatronales: parseInt(row.cell[6] || "0"),
     }));
 
-    console.log('Processed data items:', data.length);
-
     return new NextResponse(JSON.stringify(data), {
       status: 200,
       headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=7200'
-      }
+        "Content-Type": "application/json",
+        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
+      },
     });
-
   } catch (error) {
     console.error("Error fetching data:", error);
     const errorMessage = error instanceof Error ? error.message : "Error desconocido al obtener los datos";
     return new NextResponse(
-      JSON.stringify({ 
+      JSON.stringify({
         error: errorMessage,
         timestamp: new Date().toISOString(),
-        params: { year, month: formattedMonth }
-      }), 
-      { 
+        params: { year, month: formattedMonth },
+      }),
+      {
         status: 500,
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
   }
