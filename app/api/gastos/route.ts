@@ -10,26 +10,20 @@ export async function GET(request: Request) {
   const month = parseInt(monthParam);
   const formattedMonth = month.toString().padStart(2, '0');
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://transparencia.cba.gov.ar';
-  const url = `${baseUrl}/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
+  // Fix the URL construction
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
 
   try {
-    const controller = new AbortController();
-    const timeout = parseInt(process.env.NEXT_PUBLIC_API_TIMEOUT || '8000');
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-
     const response = await fetch(url, {
       headers: {
         'Accept': 'application/xml',
         'Content-Type': 'application/xml',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
       },
       next: { 
-        revalidate: parseInt(process.env.NEXT_PUBLIC_CACHE_TIME || '3600')
-      },
-      signal: controller.signal
+        revalidate: 3600
+      }
     });
-
-    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
