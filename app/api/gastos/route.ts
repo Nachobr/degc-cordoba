@@ -6,35 +6,30 @@ export async function GET(request: Request) {
   const yearParam = searchParams.get("year") || "2024";
   const monthParam = searchParams.get("month") || "02";
 
-  // Validate year and month parameters
   const year = parseInt(yearParam);
   const month = parseInt(monthParam);
-
-  if (isNaN(year) || year < 2017 || year > new Date().getFullYear()) {
-    return new NextResponse(
-      JSON.stringify({ error: "Año inválido. Debe estar entre 2017 y el año actual." }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
-
-  if (isNaN(month) || month < 1 || month > 12) {
-    return new NextResponse(
-      JSON.stringify({ error: "Mes inválido. Debe estar entre 1 y 12." }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
-  
-  // Format month to ensure two digits
   const formattedMonth = month.toString().padStart(2, '0');
 
-  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=1000&page=1&sidx=TOTAL_DEVENGADO&sord=desc`;
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
 
   try {
-    console.log('Fetching data from:', url);
-    const response = await fetch(url);
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+    const response = await fetch(url, {
+      headers: {
+        'Accept': 'application/xml',
+        'Content-Type': 'application/xml',
+      },
+      next: { 
+        revalidate: 3600 // Cache for 1 hour
+      },
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
-      console.error('Response not OK:', response.status, response.statusText);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
