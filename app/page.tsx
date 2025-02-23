@@ -27,14 +27,9 @@ export default function Home() {
       setLoading(true);
       setError(null);
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000);
-
         const response = await fetch(`/api/gastos?year=2024&month=02`, {
-          signal: controller.signal
+          next: { revalidate: 3600 }
         });
-
-        clearTimeout(timeoutId);
 
         if (!response.ok) {
           throw new Error(`Error al obtener los datos: ${response.statusText}`);
