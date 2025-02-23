@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useRouter } from "next/navigation";
+import { getGastosData } from "@/app/utils/getData";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -36,7 +37,6 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
 
   useEffect(() => {
     let isMounted = true;
-    const abortController = new AbortController();
 
     async function fetchSpendingData() {
       if (!year || !month) return;
@@ -45,21 +45,22 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
       setError(null);
       
       try {
-        const url = `/api/gastos?year=${year}&month=${month}`;
-        const response = await fetch(url, {
-          signal: abortController.signal
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
+        const data = await getGastosData(year, month);
+        
         if (!isMounted) return;
 
-        // Filter by selected jurisdiction and handle empty results
-        const filteredData = data.filter((item: SpendingDataItem) => 
+        // Transform and filter data
+        const transformedData = data.map((item: any) => ({
+          jurisdiccion: item.cell[0],
+          unidadOrganigrama: item.cell[1],
+          unidadSuperior: item.cell[2],
+          cargo: item.cell[3],
+          montoBruto: parseInt(item.cell[4]),
+          aportesPersonales: parseInt(item.cell[5]),
+          contribucionesPatronales: parseInt(item.cell[6])
+        }));
+
+        const filteredData = transformedData.filter((item: SpendingDataItem) => 
           item.jurisdiccion === decodeURIComponent(jurisdiccion)
         );
 
@@ -72,10 +73,6 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
           setLoading(false);
         }
       } catch (error) {
-        if (!isMounted) return;
-        if (error instanceof Error && error.name === 'AbortError') {
-          return;
-        }
         console.error("Error fetching spending data:", error);
         if (isMounted) {
           setError(error instanceof Error ? error.message : "Error desconocido al obtener los datos");
@@ -88,7 +85,6 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
 
     return () => {
       isMounted = false;
-      abortController.abort();
     };
   }, [jurisdiccion, year, month]);
 
