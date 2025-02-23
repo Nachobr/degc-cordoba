@@ -2,12 +2,13 @@
   "name": "degc-cordoba",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "mkdir -p public/data && echo '{\"2024\":{\"12\":[]}}' > public/data/gastos.json && next build",
     "start": "next start",
     "lint": "next lint",
-    "worker": "ts-node workers/fetchGastos.ts"
+    "worker": "tsx workers/fetchGastos.ts"
   },
   "dependencies": {
     "chart.js": "^4.4.8",
@@ -16,7 +17,8 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-error-boundary": "^5.0.0"
+    "react-error-boundary": "^5.0.0",
+    "tsx": "^4.19.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

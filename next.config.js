@@ -15,8 +15,10 @@ const nextConfig = {
         ]
       }
     ]
+  },
+  experimental: {
+    serverActions: true,
   }
 };
 
-// Use CommonJS export
-module.exports = nextConfig;
+export default nextConfig;
