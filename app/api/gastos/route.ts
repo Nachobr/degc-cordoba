@@ -10,11 +10,13 @@ export async function GET(request: Request) {
   const month = parseInt(monthParam);
   const formattedMonth = month.toString().padStart(2, '0');
 
-  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://transparencia.cba.gov.ar';
+  const url = `${baseUrl}/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=30&page=1&sidx=invdate&sord=desc`;
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    const timeout = parseInt(process.env.NEXT_PUBLIC_API_TIMEOUT || '8000');
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
 
     const response = await fetch(url, {
       headers: {
@@ -22,7 +24,7 @@ export async function GET(request: Request) {
         'Content-Type': 'application/xml',
       },
       next: { 
-        revalidate: 3600 // Cache for 1 hour
+        revalidate: parseInt(process.env.NEXT_PUBLIC_CACHE_TIME || '3600')
       },
       signal: controller.signal
     });
