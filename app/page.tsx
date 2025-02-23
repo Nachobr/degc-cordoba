@@ -27,7 +27,7 @@ export default function Home() {
       try {
         const data = await getGastosData("2024", "12");
         const sortedData = data
-          .sort((a, b) => b.montoBruto - a.montoBruto)
+          .sort((a: { montoBruto: number; }, b: { montoBruto: number; }) => b.montoBruto - a.montoBruto)
           .slice(0, 10)
           .map((item: any) => ({
             jurisdiccion: item.cell[0],
@@ -52,50 +52,50 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-blue-900">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-blue-900 dark:text-white">
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center p-6">
-        <h1 className="text-4xl font-bold mb-4 text-center">
+        <h1 className="text-4xl font-bold mb-4 text-center text-blue-900 dark:text-white">
           Departamento de Eficiencia Gubernamental de Córdoba
         </h1>
-        <p className="text-lg text-center mb-6">
+        <p className="text-lg text-center mb-6 text-blue-900 dark:text-white">
           ¡Seguí el Gasto de Córdoba en Tiempo Real! Reduzcamos el desperdicio, aumentemos la eficiencia.
         </p>
 
         {/* Feed de Gastos Recientes */}
         <section className="w-full max-w-4xl mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Gastos Recientes en Sueldos</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-blue-900 dark:text-white">Gastos Recientes en Sueldos</h2>
           {loading ? (
-            <p className="text-center">Cargando datos...</p>
+            <p className="text-center text-blue-900 dark:text-white">Cargando datos...</p>
           ) : error ? (
-            <div className="text-center text-red-600">
+            <div className="text-center text-red-600 dark:text-red-400">
               <p>{error}</p>
               <button
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
                 onClick={() => window.location.reload()}
               >
                 Intentar de nuevo
               </button>
             </div>
           ) : recentSpending.length === 0 ? (
-            <p className="text-center">No hay datos disponibles.</p>
+            <p className="text-center text-blue-900 dark:text-white">No hay datos disponibles.</p>
           ) : (
             <ul className="space-y-4">
               {recentSpending.map((item, index) => (
                 <li
                   key={index}
-                  className="border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center"
+                  className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
                 >
                   <div>
-                    <p className="font-medium">{item.jurisdiccion}</p>
-                    <p className="text-sm text-gray-600">{item.cargo}</p>
-                    <p className="text-xs text-gray-500">{item.unidadOrganigrama}</p>
+                    <p className="font-medium text-blue-900 dark:text-white">{item.jurisdiccion}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{item.cargo}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.unidadOrganigrama}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold">
+                    <p className="font-semibold text-blue-900 dark:text-white">
                       ${item.montoBruto.toLocaleString("es-AR")}
                     </p>
-                    <p className="text-xs text-gray-500">Monto Bruto</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Monto Bruto</p>
                   </div>
                 </li>
               ))}

@@ -8,8 +8,11 @@ export async function GET(request: Request) {
   const monthParam = searchParams.get("month") || "02";
 
   try {
-    // Read from the JSON file created by the worker
-    const dataPath = path.join(process.cwd(), 'public', 'data', 'gastos.json');
+    // Try reading from /tmp first (Vercel), then fallback to public
+    const dataPath = process.env.VERCEL 
+      ? path.join('/tmp', 'gastos.json')
+      : path.join(process.cwd(), 'public', 'data', 'gastos.json');
+
     const jsonData = await fs.readFile(dataPath, 'utf-8');
     const data = JSON.parse(jsonData);
 
@@ -41,3 +44,6 @@ export async function GET(request: Request) {
     );
   }
 }
+// Add proper edge runtime configuration
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
