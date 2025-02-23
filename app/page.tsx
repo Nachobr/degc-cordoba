@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { getGastosData } from "./utils/getData";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -20,48 +21,34 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-    const abortController = new AbortController();
-
     async function fetchRecentSpending() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/gastos?year=2024&month=02`, {
-          next: { revalidate: 3600 }
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
-        }
-
-        const data: SpendingDataItem[] = await response.json();
+        const data = await getGastosData("2024", "12");
         const sortedData = data
           .sort((a, b) => b.montoBruto - a.montoBruto)
-          .slice(0, 10);
+          .slice(0, 10)
+          .map((item: any) => ({
+            jurisdiccion: item.cell[0],
+            unidadOrganigrama: item.cell[1],
+            unidadSuperior: item.cell[2],
+            cargo: item.cell[3],
+            montoBruto: parseInt(item.cell[4]),
+            aportesPersonales: parseInt(item.cell[5]),
+            contribucionesPatronales: parseInt(item.cell[6])
+          }));
 
-        if (isMounted) {
-          setRecentSpending(sortedData);
-          setLoading(false);
-        }
+        setRecentSpending(sortedData);
       } catch (err) {
-        if (err instanceof Error && err.name === 'AbortError') {
-          return;
-        }
-        console.error("Error fetching recent spending:", err);
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Error desconocido");
-          setLoading(false);
-        }
+        console.error("Error fetching data:", err);
+        setError(err instanceof Error ? err.message : "Error desconocido");
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchRecentSpending();
-
-    return () => {
-      isMounted = false;
-      abortController.abort(); // This will trigger AbortError, but we handle it gracefully
-    };
   }, []);
 
   return (

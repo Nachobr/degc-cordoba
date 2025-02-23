@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import { getGastosData } from "../utils/getData";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -23,45 +24,29 @@ export default function Gastos() {
   const [month, setMonth] = useState("02");
 
   useEffect(() => {
-    let isMounted = true;
-    const abortController = new AbortController();
-
     async function fetchSpendingData() {
       setLoading(true);
       setError(null);
       try {
-        const url = `/api/gastos?year=${year}&month=${month}`;
-        const response = await fetch(url, {
-          signal: abortController.signal
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (isMounted) {
-          setSpendingData(data);
-          setLoading(false);
-        }
+        const data = await getGastosData(year, month);
+        const formattedData = data.map((item: any) => ({
+          jurisdiccion: item.cell[0],
+          unidadOrganigrama: item.cell[1],
+          unidadSuperior: item.cell[2],
+          cargo: item.cell[3],
+          montoBruto: parseInt(item.cell[4]),
+          aportesPersonales: parseInt(item.cell[5]),
+          contribucionesPatronales: parseInt(item.cell[6])
+        }));
+        setSpendingData(formattedData);
       } catch (err) {
-        if (err instanceof Error && err.name === 'AbortError') {
-          return;
-        }
-        console.error("Error fetching spending data:", err);
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Error desconocido");
-          setLoading(false);
-        }
+        setError(err instanceof Error ? err.message : "Error desconocido");
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchSpendingData();
-
-    return () => {
-      isMounted = false;
-      abortController.abort(); // This will trigger AbortError, but we handle it gracefully
-    };
   }, [year, month]);
 
   if (loading) return <div className="text-center p-6">Cargando datos...</div>;
