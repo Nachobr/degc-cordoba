@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import sueldosData from "../data/sueldos.json"; // Importa el JSON directamente
+import sueldosData from "../data/sueldos.json"; 
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -13,24 +13,27 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
-  year: number; // Añadido por el script
-  month: string; // Añadido por el script
+  year: number;
+  month: string;
 }
 
 export default function Home() {
   const [recentSpending, setRecentSpending] = useState<SpendingDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // Estado para ordenamiento
 
   useEffect(() => {
     try {
-      // Ordenar todos los datos por montoBruto y tomar los 10 primeros
-      const sortedData = Array.isArray(sueldosData) 
-        ? sueldosData
-            .sort((a, b) => b.montoBruto - a.montoBruto)
+      const sortedData = Array.isArray(sueldosData)
+        ? [...sueldosData]
+            .sort((a, b) =>
+              sortOrder === "asc"
+                ? b.montoBruto - a.montoBruto
+                : a.montoBruto - b.montoBruto
+            )
             .slice(0, 10)
         : [];
-
       setRecentSpending(sortedData);
       setLoading(false);
     } catch (err) {
@@ -38,7 +41,11 @@ export default function Home() {
       setError("Error al procesar los datos");
       setLoading(false);
     }
-  }, []);
+  }, [sortOrder]); // Dependencia en sortOrder para reordenar al cambiar
+
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-blue-900">
@@ -52,7 +59,15 @@ export default function Home() {
         </p>
 
         <section className="w-full max-w-4xl mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Gastos Recientes en Sueldos</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold">Gastos Recientes en Sueldos</h2>
+            <button
+              onClick={toggleSortOrder}
+              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
+            >
+              Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
+            </button>
+          </div>
           {loading ? (
             <p className="text-center">Cargando datos...</p>
           ) : error ? (

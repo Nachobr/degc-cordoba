@@ -14,7 +14,7 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
-  year: number; // Permitir ambos tipos
+  year: number;
   month: string;
 }
 
@@ -24,6 +24,7 @@ export default function Gastos() {
   const [error, setError] = useState<string | null>(null);
   const [year, setYear] = useState("2025");
   const [month, setMonth] = useState("01");
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // Estado para ordenamiento
 
   useEffect(() => {
     try {
@@ -38,6 +39,31 @@ export default function Gastos() {
       setLoading(false);
     }
   }, [year, month]);
+
+  const groupedByJurisdiccion = spendingData.reduce((acc, item) => {
+    if (!acc[item.jurisdiccion]) {
+      acc[item.jurisdiccion] = { items: [], totalMontoBruto: 0 };
+    }
+    acc[item.jurisdiccion].items.push(item);
+    acc[item.jurisdiccion].totalMontoBruto += item.montoBruto;
+    return acc;
+  }, {} as Record<string, { items: SpendingDataItem[]; totalMontoBruto: number }>);
+
+  const totalGeneral = Object.values(groupedByJurisdiccion).reduce(
+    (sum, { totalMontoBruto }) => sum + totalMontoBruto,
+    0
+  );
+
+  // Ordenar jurisdicciones por totalMontoBruto
+  const sortedJurisdicciones = Object.entries(groupedByJurisdiccion).sort((a, b) =>
+    sortOrder === "asc"
+      ? b[1].totalMontoBruto - a[1].totalMontoBruto
+      : a[1].totalMontoBruto - b[1].totalMontoBruto
+  );
+
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
+  };
 
   if (loading) return <div className="text-center p-6">Cargando datos...</div>;
 
@@ -54,20 +80,6 @@ export default function Gastos() {
       </div>
     );
   }
-
-  const groupedByJurisdiccion = spendingData.reduce((acc, item) => {
-    if (!acc[item.jurisdiccion]) {
-      acc[item.jurisdiccion] = { items: [], totalMontoBruto: 0 };
-    }
-    acc[item.jurisdiccion].items.push(item);
-    acc[item.jurisdiccion].totalMontoBruto += item.montoBruto;
-    return acc;
-  }, {} as Record<string, { items: SpendingDataItem[]; totalMontoBruto: number }>);
-
-  const totalGeneral = Object.values(groupedByJurisdiccion).reduce(
-    (sum, { totalMontoBruto }) => sum + totalMontoBruto,
-    0
-  );
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-blue-900">
@@ -117,12 +129,20 @@ export default function Gastos() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl md:text-2xl font-semibold mb-4">Totales por Jurisdicción</h2>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl md:text-2xl font-semibold">Totales por Jurisdicción</h2>
+            <button
+              onClick={toggleSortOrder}
+              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
+            >
+              Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
+            </button>
+          </div>
           {spendingData.length === 0 ? (
             <p className="text-center">No hay datos disponibles para este período.</p>
           ) : (
             <ul className="space-y-4">
-              {Object.entries(groupedByJurisdiccion).map(([jurisdiccion, { totalMontoBruto }]) => (
+              {sortedJurisdicciones.map(([jurisdiccion, { totalMontoBruto }]) => (
                 <li
                   key={jurisdiccion}
                   className="border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 flex justify-between items-center"
