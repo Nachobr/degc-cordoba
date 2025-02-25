@@ -14,7 +14,7 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
-  year: string | number; // Permitir ambos tipos
+  year: number; // Permitir ambos tipos
   month: string;
 }
 

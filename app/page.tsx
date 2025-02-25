@@ -13,7 +13,7 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
-  year: string; // Añadido por el script
+  year: number; // Añadido por el script
   month: string; // Añadido por el script
 }
 
