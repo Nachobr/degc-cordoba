@@ -6,9 +6,9 @@ El DEGC es una plataforma de transparencia gubernamental que permite a los ciuda
 ## Características Principales
 - 📊 Visualización de gastos en sueldos públicos
 - 🔍 Búsqueda por jurisdicción y período
-- 📅 Datos actualizados mensualmente
+- 📅 Datos actualizados mensualmente (en progreso)
 - 📱 Diseño responsive
-- 🚨 Sistema de denuncias ciudadanas
+- 🚨 Sistema de denuncias ciudadanas (incompleto)
 
 ## Objetivos
 - Aumentar la transparencia en el gasto público
