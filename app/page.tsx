@@ -24,7 +24,7 @@ export default function Home() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("/api/gastos?year=2024&month=02");
+        const response = await fetch("/api/gastos?year=2025&month=01");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

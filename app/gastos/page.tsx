@@ -19,8 +19,8 @@ export default function Gastos() {
   const [spendingData, setSpendingData] = useState<SpendingDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [year, setYear] = useState("2024");
-  const [month, setMonth] = useState("02");
+  const [year, setYear] = useState("2025");
+  const [month, setMonth] = useState("01");
 
   useEffect(() => {
     let isMounted = true;
