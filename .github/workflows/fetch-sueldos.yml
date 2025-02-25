@@ -1,6 +1,9 @@
 name: Fetch Sueldos Data
 
 on:
+  push:
+    branches:
+      - test  # Corre cuando hagas push a la rama test
   schedule:
     - cron: "0 * * * *" # Cada hora
   workflow_dispatch: # Ejecución manual
@@ -11,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: test  # Asegura que checkout sea en la rama test
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
