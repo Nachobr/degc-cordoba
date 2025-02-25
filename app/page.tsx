@@ -91,9 +91,9 @@ export default function Home() {
                 >
                   <div>
                     <p className="font-medium">{item.jurisdiccion}</p>
-                    <p className="text-sm text-gray-600">{item.cargo}</p>
-                    <p className="text-xs text-gray-500">{item.unidadOrganigrama}</p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm text-white-600">{item.cargo}</p>
+                    <p className="text-xs text-white-500">{item.unidadOrganigrama}</p>
+                    <p className="text-xs text-white-500">
                       {item.month}/{item.year}
                     </p>
                   </div>
