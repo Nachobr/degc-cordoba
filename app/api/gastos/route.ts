@@ -10,16 +10,14 @@ export async function GET(request: Request) {
   const month = parseInt(monthParam);
   const formattedMonth = month.toString().padStart(2, "0");
 
-  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=10&page=1&sidx=invdate&sord=desc`;
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=5&page=1&sidx=invdate&sord=desc`;
 
   try {
     const response = await fetch(url, {
       headers: {
         "Accept": "application/xml",
-        "Content-Type": "application/xml",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
       },
-      next: { revalidate: 3600 }, // Cache por 1 hora
     });
 
     if (!response.ok) {
@@ -31,10 +29,9 @@ export async function GET(request: Request) {
       throw new Error("Received empty response from server");
     }
 
-    // Optimizar el parsing
     const parser = new XMLParser({
-      ignoreAttributes: true, // Ignorar atributos para acelerar
-      parseTagValue: false,  // No procesar valores innecesarios
+      ignoreAttributes: true,
+      parseTagValue: false,
     });
     const jsonData = parser.parse(xmlText);
 
@@ -49,28 +46,10 @@ export async function GET(request: Request) {
       contribucionesPatronales: parseInt(row.cell[6] || "0"),
     }));
 
-    return new NextResponse(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
-      },
-    });
+    return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching data:", error);
-    const errorMessage = error instanceof Error ? error.message : "Error desconocido al obtener los datos";
-    return new NextResponse(
-      JSON.stringify({
-        error: errorMessage,
-        timestamp: new Date().toISOString(),
-        params: { year, month: formattedMonth },
-      }),
-      {
-        status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const errorMessage = error instanceof Error ? error.message : "Error desconocido";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
