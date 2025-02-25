@@ -11,6 +11,7 @@
     "worker": "tsx workers/fetchGastos.ts"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.8",
     "fast-xml-parser": "^5.0.6",
