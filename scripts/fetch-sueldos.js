@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
-const { XMLParser } = require("fast-xml-parser");
-const fs = require("fs").promises;
+import { XMLParser } from "fast-xml-parser";
+import { promises as fs } from "fs";
 
 async function fetchAndStoreSueldos() {
   const year = process.env.YEAR || "2025"; 
