@@ -2,10 +2,10 @@ const { XMLParser } = require("fast-xml-parser");
 const fs = require("fs").promises;
 
 async function fetchAndStoreSueldos() {
-  const year = process.env.YEAR || "2024";
-  const month = process.env.MONTH || "02";
+  const year = process.env.YEAR || "2025";
+  const month = process.env.MONTH || "01";
   const formattedMonth = month.padStart(2, "0");
-  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=1000&page=1&sidx=invdate&sord=desc`;
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=5&page=1&sidx=invdate&sord=desc`;
 
   try {
     const response = await fetch(url, {

@@ -28,8 +28,8 @@ jobs:
       - name: Fetch and parse sueldos data
         run: node scripts/fetch-sueldos.js
         env:
-          YEAR: "2024"
-          MONTH: "02"
+          YEAR: "2025"
+          MONTH: "01"
 
       - name: Commit and push changes
         run: |
