@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { useRouter } from "next/navigation";
+import sueldosData from "../../../data/sueldos.json";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -13,16 +14,18 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
+  year: number;
+  month: string;
 }
 
 export default function JurisdiccionDetail({ params }: { params: { jurisdiccion: string } }) {
   const [spendingData, setSpendingData] = useState<SpendingDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // Estado para ordenamiento
   const router = useRouter();
   const { jurisdiccion } = params;
 
-  // Get year and month from URL search params safely
   const [year, setYear] = useState("2024");
   const [month, setMonth] = useState("02");
 
@@ -35,62 +38,34 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    const abortController = new AbortController();
-
-    async function fetchSpendingData() {
-      if (!year || !month) return;
-      
-      setLoading(true);
-      setError(null);
-      
-      try {
-        const url = `/api/gastos?year=${year}&month=${month}`;
-        const response = await fetch(url, {
-          signal: abortController.signal
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-
-        if (!isMounted) return;
-
-        // Filter by selected jurisdiction and handle empty results
-        const filteredData = data.filter((item: SpendingDataItem) => 
-          item.jurisdiccion === decodeURIComponent(jurisdiccion)
-        );
-
-        if (filteredData.length === 0) {
-          setError(`No se encontraron datos para ${decodeURIComponent(jurisdiccion)} en ${month}/${year}`);
-        }
-
-        if (isMounted) {
-          setSpendingData(filteredData);
-          setLoading(false);
-        }
-      } catch (error) {
-        if (!isMounted) return;
-        if (error instanceof Error && error.name === 'AbortError') {
-          return;
-        }
-        console.error("Error fetching spending data:", error);
-        if (isMounted) {
-          setError(error instanceof Error ? error.message : "Error desconocido al obtener los datos");
-          setLoading(false);
-        }
+    try {
+      const filteredData = Array.isArray(sueldosData)
+        ? sueldosData
+            .filter(
+              (item) =>
+                item.jurisdiccion === decodeURIComponent(jurisdiccion) &&
+                String(item.year) === year &&
+                item.month === month
+            )
+            .sort((a, b) =>
+              sortOrder === "asc" ? b.montoBruto - a.montoBruto : a.montoBruto - b.montoBruto
+            )
+        : [];
+      if (filteredData.length === 0) {
+        setError(`No se encontraron datos para ${decodeURIComponent(jurisdiccion)} en ${month}/${year}`);
       }
+      setSpendingData(filteredData);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error processing spending data:", err);
+      setError("Error al procesar los datos");
+      setLoading(false);
     }
+  }, [jurisdiccion, year, month, sortOrder]);
 
-    fetchSpendingData();
-
-    return () => {
-      isMounted = false;
-      abortController.abort();
-    };
-  }, [jurisdiccion, year, month]);
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
+  };
 
   if (loading) {
     return (
@@ -141,12 +116,20 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
           Desglose de sueldos para {month}/{year}.
         </p>
 
-        <button
-          onClick={() => router.push(`/gastos?year=${year}&month=${month}`)}
-          className="mb-6 text-blue-500 hover:underline"
-        >
-          ← Volver a Totales
-        </button>
+        <div className="flex justify-between items-center mb-4">
+          <button
+            onClick={() => router.push(`/gastos?year=${year}&month=${month}`)}
+            className="text-blue-500 hover:underline"
+          >
+            ← Volver a Totales
+          </button>
+          <button
+            onClick={toggleSortOrder}
+            className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
+          >
+            Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
+          </button>
+        </div>
 
         <div className="overflow-x-auto -mx-4 md:mx-0">
           <div className="inline-block min-w-full align-middle">
