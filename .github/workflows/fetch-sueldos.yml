@@ -3,19 +3,20 @@ name: Fetch Sueldos Data
 on:
   push:
     branches:
-      - test  # Corre cuando hagas push a la rama test
+      - test
   schedule:
-    - cron: "0 * * * *" # Cada hora
-  workflow_dispatch: # Ejecución manual
+    - cron: "0 * * * *"
+  workflow_dispatch:
 
 jobs:
   fetch-and-store:
     runs-on: ubuntu-latest
+    timeout-minutes: 5  # Límite de 5 minutos para el job
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test  # Asegura que checkout sea en la rama test
+          ref: test
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -23,12 +24,12 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install fast-xml-parser
+        run: npm install fast-xml-parser node-fetch
 
       - name: Fetch and parse sueldos data
         run: node scripts/fetch-sueldos.js
         env:
-          YEAR: "2025"
+          YEAR: "2025"  
           MONTH: "01"
 
       - name: Commit and push changes
