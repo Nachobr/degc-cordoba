@@ -3,10 +3,21 @@ import { XMLParser } from "fast-xml-parser";
 import { promises as fs } from "fs";
 
 async function fetchAndStoreSueldos() {
-  const year = process.env.YEAR || "2025";
-  const month = process.env.MONTH || "01";
+  const year = process.env.YEAR || "2025"; // Default to "2025" if YEAR is not set
+  const month = process.env.MONTH || "01"; // Default to "01" if MONTH is not set
+
+  // Validate and format year and month
+  const formattedYear = parseInt(year, 10);
   const formattedMonth = month.padStart(2, "0");
-  const url = `https://cors-anywhere.herokuapp.com/https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=10&page=1&sidx=invdate&sord=desc`;
+
+  if (isNaN(formattedYear) || formattedYear < 2000 || formattedYear > 2100) {
+    throw new Error("Invalid YEAR environment variable");
+  }
+  if (isNaN(parseInt(month, 10)) || parseInt(month, 10) < 1 || parseInt(month, 10) > 12) {
+    throw new Error("Invalid MONTH environment variable");
+  }
+
+  const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${formattedYear}&mes=${formattedMonth}&rows=10&page=1&sidx=invdate&sord=desc`;
   let attempts = 0;
   const maxAttempts = 3;
 
@@ -24,6 +35,7 @@ async function fetchAndStoreSueldos() {
     try {
       attempts++;
       console.log(`Attempt ${attempts} to fetch data...`);
+      console.log(`Fetching data from URL: ${url}`);
 
       // Fetch data with a global timeout of 60 seconds
       const fetchPromise = fetch(url, {
@@ -36,13 +48,16 @@ async function fetchAndStoreSueldos() {
 
       const response = await withTimeout(fetchPromise, 60000); // Enforce a global timeout of 60 seconds
 
+      console.log(`Response received. Status: ${response.status}`);
+      console.log(`Response headers:`, Object.fromEntries(response.headers));
+
       if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(`HTTP error! Status: ${response.status}, Body: ${errorBody}`);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      console.log(`Response received. Status: ${response.status}`);
       const xmlText = await response.text();
-
       if (!xmlText || xmlText.trim().length === 0) {
         throw new Error("Received empty response from server");
       }
