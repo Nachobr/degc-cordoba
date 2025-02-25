@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 const { XMLParser } = require("fast-xml-parser");
 const fs = require("fs").promises;
 
