@@ -37,16 +37,16 @@ async function fetchAndStoreSueldos() {
       console.log(`Attempt ${attempts} to fetch data...`);
       console.log(`Fetching data from URL: ${url}`);
 
-      // Fetch data with a global timeout of 60 seconds
+      // Fetch data with a global timeout of 90 seconds
       const fetchPromise = fetch(url, {
         headers: {
           "Accept": "application/xml",
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
         },
-        timeout: 30000, // 30 seconds for the HTTP request itself
+        timeout: 60000, // Increase timeout to 60 seconds
       });
 
-      const response = await withTimeout(fetchPromise, 60000); // Enforce a global timeout of 60 seconds
+      const response = await withTimeout(fetchPromise, 90000); // Enforce a global timeout of 90 seconds
 
       console.log(`Response received. Status: ${response.status}`);
       console.log(`Response headers:`, Object.fromEntries(response.headers));
