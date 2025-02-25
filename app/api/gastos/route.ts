@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 export async function GET(request: Request) {
   try {
-    const filePath = path.join(process.cwd(), "data", "sueldos.json");
-    const jsonData = await fs.readFile(filePath, "utf8");
-    const data = JSON.parse(jsonData);
-
-    return NextResponse.json(data);
+    // Import JSON directly instead of using fs
+    const data = await import("../../../data/sueldos.json");
+    return NextResponse.json(data.default);
   } catch (error) {
     console.error("Error reading sueldos data:", error);
     return NextResponse.json(
@@ -17,6 +13,6 @@ export async function GET(request: Request) {
     );
   }
 }
-// Add proper edge runtime configuration
+
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';

@@ -156,7 +156,7 @@ export default function Gastos() {
                   <span className="font-semibold text-blue-900 dark:text-white">${totalMontoBruto.toLocaleString("es-AR")}</span>
                 </li>
               ))}
-              <li className="border rounded-lg p-4 bg-blue-100 flex justify-between items-center font-bold">
+              <li className="border rounded-lg p-4 bg-blue-100 flex justify-between items-center font-bold dark:bg-gray-900">
                 <span>Total Gastado</span>
                 <span>${totalGeneral.toLocaleString("es-AR")}</span>
               </li>
