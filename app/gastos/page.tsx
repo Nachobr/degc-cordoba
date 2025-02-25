@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Link from "next/link";
+import sueldosData from "../../data/sueldos.json";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -13,6 +14,8 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
+  year: string | number; // Permitir ambos tipos
+  month: string;
 }
 
 export default function Gastos() {
@@ -23,45 +26,17 @@ export default function Gastos() {
   const [month, setMonth] = useState("01");
 
   useEffect(() => {
-    let isMounted = true;
-    const abortController = new AbortController();
-
-    async function fetchSpendingData() {
-      setLoading(true);
-      setError(null);
-      try {
-        const url = `/api/gastos?year=${year}&month=${month}`;
-        const response = await fetch(url, {
-          signal: abortController.signal
-        });
-
-        if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (isMounted) {
-          setSpendingData(data);
-          setLoading(false);
-        }
-      } catch (err) {
-        if (err instanceof Error && err.name === 'AbortError') {
-          return;
-        }
-        console.error("Error fetching spending data:", err);
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Error desconocido");
-          setLoading(false);
-        }
-      }
+    try {
+      const filteredData = Array.isArray(sueldosData)
+        ? sueldosData.filter((item) => String(item.year) === year && item.month === month)
+        : [];
+      setSpendingData(filteredData);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error processing spending data:", err);
+      setError("Error al procesar los datos");
+      setLoading(false);
     }
-
-    fetchSpendingData();
-
-    return () => {
-      isMounted = false;
-      abortController.abort(); // This will trigger AbortError, but we handle it gracefully
-    };
   }, [year, month]);
 
   if (loading) return <div className="text-center p-6">Cargando datos...</div>;
@@ -80,7 +55,6 @@ export default function Gastos() {
     );
   }
 
-  // Agrupar y sumar totales por jurisdicción
   const groupedByJurisdiccion = spendingData.reduce((acc, item) => {
     if (!acc[item.jurisdiccion]) {
       acc[item.jurisdiccion] = { items: [], totalMontoBruto: 0 };
@@ -90,7 +64,6 @@ export default function Gastos() {
     return acc;
   }, {} as Record<string, { items: SpendingDataItem[]; totalMontoBruto: number }>);
 
-  // Calcular el total general de todas las jurisdicciones
   const totalGeneral = Object.values(groupedByJurisdiccion).reduce(
     (sum, { totalMontoBruto }) => sum + totalMontoBruto,
     0
@@ -114,7 +87,7 @@ export default function Gastos() {
               onChange={(e) => setYear(e.target.value)}
               className="p-2 border rounded w-full sm:w-auto"
             >
-              {Array.from({ length: 9 }, (_, i) => 2017 + i).map((y) => (
+              {Array.from({ length: 2 }, (_, i) => 2024 + i).map((y) => (
                 <option key={y} value={y}>{y}</option>
               ))}
             </select>
@@ -143,7 +116,6 @@ export default function Gastos() {
           </div>
         </div>
 
-        {/* Lista de Jurisdicciones con Totales */}
         <div className="mb-8">
           <h2 className="text-xl md:text-2xl font-semibold mb-4">Totales por Jurisdicción</h2>
           {spendingData.length === 0 ? (
@@ -164,7 +136,6 @@ export default function Gastos() {
                   <span className="font-semibold">${totalMontoBruto.toLocaleString("es-AR")}</span>
                 </li>
               ))}
-              {/* Fila de Total General */}
               <li className="border rounded-lg p-4 bg-blue-100 flex justify-between items-center font-bold">
                 <span>Total Gastado</span>
                 <span>${totalGeneral.toLocaleString("es-AR")}</span>

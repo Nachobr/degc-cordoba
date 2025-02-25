@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import sueldosData from "../data/sueldos.json"; // Importa el JSON directamente
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -12,6 +13,8 @@ interface SpendingDataItem {
   montoBruto: number;
   aportesPersonales: number;
   contribucionesPatronales: number;
+  year: string; // Añadido por el script
+  month: string; // Añadido por el script
 }
 
 export default function Home() {
@@ -20,30 +23,21 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchRecentSpending() {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch("/api/gastos?year=2025&month=01");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+    try {
+      // Ordenar todos los datos por montoBruto y tomar los 10 primeros
+      const sortedData = Array.isArray(sueldosData) 
+        ? sueldosData
+            .sort((a, b) => b.montoBruto - a.montoBruto)
+            .slice(0, 10)
+        : [];
 
-        const data: SpendingDataItem[] = await response.json();
-        const sortedData = data
-          .sort((a, b) => b.montoBruto - a.montoBruto)
-          .slice(0, 10);
-
-        setRecentSpending(sortedData);
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching recent spending:", err);
-        setError(err instanceof Error ? err.message : "Error desconocido");
-        setLoading(false);
-      }
+      setRecentSpending(sortedData);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error processing spending data:", err);
+      setError("Error al procesar los datos");
+      setLoading(false);
     }
-
-    fetchRecentSpending();
   }, []);
 
   return (
@@ -84,6 +78,9 @@ export default function Home() {
                     <p className="font-medium">{item.jurisdiccion}</p>
                     <p className="text-sm text-gray-600">{item.cargo}</p>
                     <p className="text-xs text-gray-500">{item.unidadOrganigrama}</p>
+                    <p className="text-xs text-gray-500">
+                      {item.month}/{item.year}
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="font-semibold">
