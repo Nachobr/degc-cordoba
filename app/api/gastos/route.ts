@@ -17,3 +17,6 @@ export async function GET(request: Request) {
     );
   }
 }
+// Add proper edge runtime configuration
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
