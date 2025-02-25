@@ -1,0 +1,35 @@
+name: Fetch Sueldos Data
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Cada hora
+  workflow_dispatch: # Ejecución manual
+
+jobs:
+  fetch-and-store:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install fast-xml-parser
+
+      - name: Fetch and parse sueldos data
+        run: node scripts/fetch-sueldos.js
+        env:
+          YEAR: "2024"
+          MONTH: "02"
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/sueldos.json
+          git commit -m "Update sueldos data" || echo "No changes to commit"
+          git push
