@@ -5,13 +5,14 @@ on:
     branches:
       - test
   schedule:
-    - cron: "0 * * * *"
-  workflow_dispatch:
+    - cron: "0 * * * *" # Runs every hour
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   fetch-and-store:
     runs-on: ubuntu-latest
-    timeout-minutes: 5  # Límite de 5 minutos para el job
+    timeout-minutes: 5 # Límite de 5 minutos para el job
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,10 +27,14 @@ jobs:
       - name: Install dependencies
         run: npm install fast-xml-parser node-fetch
 
+      - name: Test API Connectivity
+        run: |
+          curl -v --connect-timeout 30 https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=2025&mes=01&rows=10&page=1&sidx=invdate&sord=desc || echo "API connectivity test failed"
+
       - name: Fetch and parse sueldos data
         run: node scripts/fetch-sueldos.js
         env:
-          YEAR: "2025"  
+          YEAR: "2025"
           MONTH: "01"
 
       - name: Commit and push changes
@@ -37,5 +42,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add data/sueldos.json
-          git commit -m "Update sueldos data" || echo "No changes to commit"
-          git push
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update sueldos data"
+          git push || echo "No changes to push"
