@@ -20,48 +20,58 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-    const abortController = new AbortController();
-
     async function fetchRecentSpending() {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`/api/gastos?year=2024&month=02`, {
-          next: { revalidate: 3600 }
+        const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=2024&mes=02&rows=10&page=1&sidx=invdate&sord=desc`;
+        const response = await fetch(url, {
+          headers: {
+            "Accept": "application/xml",
+            "Content-Type": "application/xml",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+          },
         });
 
         if (!response.ok) {
-          throw new Error(`Error al obtener los datos: ${response.statusText}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data: SpendingDataItem[] = await response.json();
+        const xmlText = await response.text();
+        if (!xmlText || xmlText.trim().length === 0) {
+          throw new Error("Received empty response from server");
+        }
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+        const rows = xmlDoc.getElementsByTagName("row");
+        const data = Array.from(rows).map((row) => {
+          const cells = row.getElementsByTagName("cell");
+          return {
+            jurisdiccion: cells[0].textContent || "Sin Jurisdicción",
+            unidadOrganigrama: cells[1].textContent || "Sin Unidad",
+            unidadSuperior: cells[2].textContent || "Sin Superior",
+            cargo: cells[3].textContent || "Sin Cargo",
+            montoBruto: parseInt(cells[4].textContent || "0"),
+            aportesPersonales: parseInt(cells[5].textContent || "0"),
+            contribucionesPatronales: parseInt(cells[6].textContent || "0"),
+          };
+        });
+
         const sortedData = data
           .sort((a, b) => b.montoBruto - a.montoBruto)
           .slice(0, 10);
 
-        if (isMounted) {
-          setRecentSpending(sortedData);
-          setLoading(false);
-        }
+        setRecentSpending(sortedData);
+        setLoading(false);
       } catch (err) {
-        if (err instanceof Error && err.name === 'AbortError') {
-          return;
-        }
         console.error("Error fetching recent spending:", err);
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : "Error desconocido");
-          setLoading(false);
-        }
+        setError(err instanceof Error ? err.message : "Error desconocido");
+        setLoading(false);
       }
     }
 
     fetchRecentSpending();
-
-    return () => {
-      isMounted = false;
-      abortController.abort(); // This will trigger AbortError, but we handle it gracefully
-    };
   }, []);
 
   return (
@@ -75,7 +85,6 @@ export default function Home() {
           ¡Seguí el Gasto de Córdoba en Tiempo Real! Reduzcamos el desperdicio, aumentemos la eficiencia.
         </p>
 
-        {/* Feed de Gastos Recientes */}
         <section className="w-full max-w-4xl mb-8">
           <h2 className="text-2xl font-semibold mb-4">Gastos Recientes en Sueldos</h2>
           {loading ? (
@@ -116,7 +125,6 @@ export default function Home() {
           )}
         </section>
 
-        {/* Botones */}
         <div className="space-x-4">
           <a href="/gastos" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
             Ver Gastos
