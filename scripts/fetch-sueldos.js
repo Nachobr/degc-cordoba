@@ -3,10 +3,10 @@ import { XMLParser } from "fast-xml-parser";
 import { promises as fs } from "fs";
 
 async function fetchAndStoreSueldos() {
-  const startYear = 2024;
+  const startYear = 2023;
   const startMonth = 1; // Enero 2024
   const endYear = 2025;
-  const endMonth = 1; // Enero 2025
+  const endMonth = 2; // Enero 2025
   const maxAttempts = 3;
   let allData = [];
 
@@ -15,7 +15,7 @@ async function fetchAndStoreSueldos() {
     const monthLimit = year === endYear ? endMonth : 12; // Stop at January 2025
     for (let month = year === startYear ? startMonth : 1; month <= monthLimit; month++) {
       const formattedMonth = String(month).padStart(2, "0");
-      const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=100&page=1&sidx=invdate&sord=desc`;
+      const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=1000&page=1&sidx=invdate&sord=desc`;
       let attempts = 0;
 
       while (attempts < maxAttempts) {

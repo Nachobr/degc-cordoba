@@ -24,7 +24,7 @@ export default function Gastos() {
   const [error, setError] = useState<string | null>(null);
   const [year, setYear] = useState("2025");
   const [month, setMonth] = useState("01");
-  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // Estado para ordenamiento
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
 
   useEffect(() => {
     try {
@@ -54,9 +54,21 @@ export default function Gastos() {
     0
   );
 
-  // Ordenar jurisdicciones por totalMontoBruto
+  // Calcular el total anual parcial hasta el mes seleccionado
+  const yearlyPartialTotal = Array.isArray(sueldosData)
+    ? sueldosData
+        .filter((item) => String(item.year) === year && item.month <= month)
+        .reduce((sum, item) => sum + item.montoBruto, 0)
+    : 0;
+
+  // Determinar si el total es completo (diciembre) o parcial
+  const isYearlyTotalComplete = month === "12";
+  const yearlyTotalLabel = isYearlyTotalComplete
+    ? `Total Anual (${year})`
+    : `Total Anual Parcial (${year} hasta ${month})`;
+
   const sortedJurisdicciones = Object.entries(groupedByJurisdiccion).sort((a, b) =>
-    sortOrder === "asc"
+    sortOrder === "desc"
       ? b[1].totalMontoBruto - a[1].totalMontoBruto
       : a[1].totalMontoBruto - b[1].totalMontoBruto
   );
@@ -85,27 +97,33 @@ export default function Gastos() {
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-blue-900 dark:text-white">
       <Navbar />
       <main className="flex-1 p-4 md:p-6 lg:p-8">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-900 dark:text-white">Rastreador de Gastos Provinciales</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-900 dark:text-white">
+          Rastreador de Gastos Provinciales
+        </h1>
         <p className="mb-6 text-sm md:text-base text-blue-900 dark:text-white">
           Total de gastos en sueldos por jurisdicción para {month}/{year}. Haz clic en una jurisdicción para ver el desglose.
         </p>
 
         <div className="mb-6 flex flex-col sm:flex-row gap-4 sm:gap-6">
           <div className="flex items-center">
-            <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">Año:</label>
+            <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
+              Año:
+            </label>
             <select
               id="year"
               value={year}
               onChange={(e) => setYear(e.target.value)}
               className="p-2 border dark:border-gray-600 rounded w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
             >
-              {Array.from({ length: 2 }, (_, i) => 2024 + i).map((y) => (
+              {Array.from({ length: 3 }, (_, i) => 2023 + i).map((y) => (
                 <option key={y} value={y}>{y}</option>
               ))}
             </select>
           </div>
           <div className="flex items-center">
-            <label htmlFor="month" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">Mes:</label>
+            <label htmlFor="month" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
+              Mes:
+            </label>
             <select
               id="month"
               value={month}
@@ -130,7 +148,9 @@ export default function Gastos() {
 
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl md:text-2xl font-semibold">Totales por Jurisdicción</h2>
+            <h2 className="text-xl md:text-2xl font-semibold text-blue-900 dark:text-white">
+              Totales por Jurisdicción
+            </h2>
             <button
               onClick={toggleSortOrder}
               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
@@ -139,7 +159,9 @@ export default function Gastos() {
             </button>
           </div>
           {spendingData.length === 0 ? (
-            <p className="text-center text-blue-900 dark:text-white">No hay datos disponibles para este período.</p>
+            <p className="text-center text-blue-900 dark:text-white">
+              No hay datos disponibles para este período.
+            </p>
           ) : (
             <ul className="space-y-4">
               {sortedJurisdicciones.map(([jurisdiccion, { totalMontoBruto }]) => (
@@ -153,12 +175,18 @@ export default function Gastos() {
                   >
                     {jurisdiccion}
                   </Link>
-                  <span className="font-semibold text-blue-900 dark:text-white">${totalMontoBruto.toLocaleString("es-AR")}</span>
+                  <span className="font-semibold text-blue-900 dark:text-white">
+                    ${totalMontoBruto.toLocaleString("es-AR")}
+                  </span>
                 </li>
               ))}
-              <li className="border rounded-lg p-4 bg-blue-100 flex justify-between items-center font-bold dark:bg-gray-900">
-                <span>Total Gastado</span>
+              <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
+                <span>Total Mensual</span>
                 <span>${totalGeneral.toLocaleString("es-AR")}</span>
+              </li>
+              <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
+                <span>{yearlyTotalLabel}</span>
+                <span>${yearlyPartialTotal.toLocaleString("es-AR")}</span>
               </li>
             </ul>
           )}
