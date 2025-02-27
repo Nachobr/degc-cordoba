@@ -52,6 +52,13 @@ export default function Gastos() {
   const [month, setMonth] = useState("01");
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
   const [showScrollButton, setShowScrollButton] = useState(false);
+  // Nuevos estados para la búsqueda
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchCategory, setSearchCategory] = useState("all");
+  // Estados para datos filtrados
+  const [filteredSpendingData, setFilteredSpendingData] = useState<SpendingDataItem[]>([]);
+  const [filteredExecutionData, setFilteredExecutionData] = useState<ExecutionDataItem[]>([]);
+  
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -81,6 +88,16 @@ export default function Gastos() {
     router.push(`/gastos?year=${selectedYear}`);
   };
 
+  // Nuevo: manejar el cambio en la búsqueda
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Nuevo: manejar el cambio en la categoría de búsqueda
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSearchCategory(e.target.value);
+  };
+
   useEffect(() => {
     setSelectedYear(urlYear);
     setYear(urlYear);
@@ -92,6 +109,7 @@ export default function Gastos() {
         ? sueldosData.filter((item) => String(item.year) === year && item.month === month)
         : [];
       setSpendingData(filteredSueldos);
+      setFilteredSpendingData(filteredSueldos);
 
       const filteredExecutions = Array.isArray(executionsData)
         ? executionsData.filter((item) => String(item.year) === year)
@@ -111,6 +129,7 @@ export default function Gastos() {
         };
       });
       setExecutionData(enrichedExecutions);
+      setFilteredExecutionData(enrichedExecutions);
 
       setLoading(false);
     } catch (err) {
@@ -120,7 +139,45 @@ export default function Gastos() {
     }
   }, [year, month]); // This effect now depends on the confirmed year/month
 
-  const groupedByJurisdiccionSueldos = spendingData.reduce((acc, item) => {
+  // Nuevo: efecto para filtrar datos según el término de búsqueda
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setFilteredSpendingData(spendingData);
+      setFilteredExecutionData(executionData);
+      return;
+    }
+
+    const term = searchTerm.toLowerCase();
+
+    // Filtrar datos de sueldos si la categoría es "all" o "sueldos"
+    if (searchCategory === "all" || searchCategory === "sueldos") {
+      const filtered = spendingData.filter(item => 
+        item.jurisdiccion.toLowerCase().includes(term) || 
+        item.unidadOrganigrama.toLowerCase().includes(term) || 
+        item.cargo.toLowerCase().includes(term)
+      );
+      setFilteredSpendingData(filtered);
+    } else {
+      // Si la categoría es "ejecucion", no mostrar resultados de sueldos
+      setFilteredSpendingData([]);
+    }
+
+    // Filtrar datos de ejecución si la categoría es "all" o "ejecucion"
+    if (searchCategory === "all" || searchCategory === "ejecucion") {
+      const filtered = executionData.filter(item => 
+        item.obra.toLowerCase().includes(term) || 
+        item.programa.toLowerCase().includes(term) || 
+        item.jurisdiccion.toLowerCase().includes(term) ||
+        item.beneficiario.toLowerCase().includes(term)
+      );
+      setFilteredExecutionData(filtered);
+    } else {
+      // Si la categoría es "sueldos", no mostrar resultados de ejecución
+      setFilteredExecutionData([]);
+    }
+  }, [searchTerm, searchCategory, spendingData, executionData]);
+
+  const groupedByJurisdiccionSueldos = filteredSpendingData.reduce((acc, item) => {
     if (!acc[item.jurisdiccion]) {
       acc[item.jurisdiccion] = { items: [], totalMontoBruto: 0 };
     }
@@ -140,7 +197,7 @@ export default function Gastos() {
       .reduce((sum, item) => sum + item.montoBruto, 0)
     : 0;
 
-  const groupedByObraExecutions = executionData.reduce((acc, item) => {
+  const groupedByObraExecutions = filteredExecutionData.reduce((acc, item) => {
     if (!acc[item.obra]) {
       acc[item.obra] = { items: [], totalMonto: 0, idObra: item.idObra };
     }
@@ -208,8 +265,9 @@ export default function Gastos() {
           Total de gastos en sueldos y ejecución presupuestaria para {month}/{year}.
         </p>
 
-        <div className="mb-6 flex flex-col sm:flex-row gap-4 sm:gap-6 items-end">
-          <div className="flex items-center gap-4">
+        <div className="mb-6 flex flex-col gap-4">
+          {/* Date selection controls */}
+          <div className="flex flex-wrap items-center gap-4 justify-center">
             <div className="flex items-center">
               <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
                 Año:
@@ -256,6 +314,42 @@ export default function Gastos() {
               Cambiar fecha
             </button>
           </div>
+          
+          {/* Search bar - now centered */}
+          <div className="flex items-center gap-2 max-w-md mx-auto w-full">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="w-full p-2 pl-3 pr-10 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+              />
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+                />
+              </svg>
+            </div>
+            <select
+              value={searchCategory}
+              onChange={handleCategoryChange}
+              className="p-2 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+            >
+              <option value="all">Todos</option>
+              <option value="sueldos">Sueldos</option>
+              <option value="ejecucion">Ejecución</option>
+            </select>
+          </div>
         </div>
 
         <div className="mb-8">
@@ -270,7 +364,11 @@ export default function Gastos() {
               Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
             </button>
           </div>
-          {spendingData.length === 0 ? (
+          {searchTerm && sortedJurisdiccionesSueldos.length === 0 && searchCategory !== "ejecucion" ? (
+            <p className="text-center text-blue-900 dark:text-white">
+              No se encontraron resultados para la búsqueda en sueldos.
+            </p>
+          ) : filteredSpendingData.length === 0 && !searchTerm ? (
             <p className="text-center text-blue-900 dark:text-white">
               No hay datos de sueldos disponibles para este período.
             </p>
@@ -292,14 +390,20 @@ export default function Gastos() {
                   </span>
                 </li>
               ))}
-              <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
-                <span>Total Mensual (Sueldos)</span>
-                <span>${totalGeneralSueldos.toLocaleString("es-AR")}</span>
-              </li>
-              <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
-                <span>{yearlyTotalLabel} (Sueldos)</span>
-                <span>${yearlyPartialTotalSueldos.toLocaleString("es-AR")}</span>
-              </li>
+              {sortedJurisdiccionesSueldos.length > 0 && (
+                <>
+                  <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
+                    <span>{searchTerm ? "Total Filtrado (Sueldos)" : "Total Mensual (Sueldos)"}</span>
+                    <span>${totalGeneralSueldos.toLocaleString("es-AR")}</span>
+                  </li>
+                  {!searchTerm && (
+                    <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
+                      <span>{yearlyTotalLabel} (Sueldos)</span>
+                      <span>${yearlyPartialTotalSueldos.toLocaleString("es-AR")}</span>
+                    </li>
+                  )}
+                </>
+              )}
             </ul>
           )}
         </div>
@@ -310,36 +414,46 @@ export default function Gastos() {
               Totales por Obra (Ejecución Presupuestaria)
             </h2>
           </div>
-          {executionData.length === 0 ? (
+          {searchTerm && sortedObrasExecutions.length === 0 && searchCategory !== "sueldos" ? (
+            <p className="text-center text-blue-900 dark:text-white">
+              No se encontraron resultados para la búsqueda en ejecución presupuestaria.
+            </p>
+          ) : filteredExecutionData.length === 0 && !searchTerm ? (
             <p className="text-center text-blue-900 dark:text-white">
               No hay datos de ejecución presupuestaria disponibles para este año.
             </p>
           ) : (
             <ul className="space-y-4">
               {sortedObrasExecutions.map(([obra, { totalMonto, idObra }]) => (
-                <li
+                <Link
                   key={obra}
-                  className="border dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+                  href={`/gastos/obra/${idObra}?year=${year}`}
+                  className="block"
                 >
-                  <Link
-                    href={`/gastos/obra/${idObra}?year=${year}`}
-                    className="font-medium text-blue-900 dark:text-white hover:underline"
-                  >
-                    {obra}
-                  </Link>
-                  <span className="font-semibold text-blue-900 dark:text-white">
-                    ${totalMonto.toLocaleString("es-AR")}
-                  </span>
-                </li>
+                  <li className="border dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center">
+                    <span className="font-medium text-blue-900 dark:text-white">
+                      {obra}
+                    </span>
+                    <span className="font-semibold text-blue-900 dark:text-white">
+                      ${totalMonto.toLocaleString("es-AR")}
+                    </span>
+                  </li>
+                </Link>
               ))}
-              <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
-                <span>Total Ejecución ({year})</span>
-                <span>${totalGeneralExecutions.toLocaleString("es-AR")}</span>
-              </li>
-              <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
-                <span>Total Anual ({year})</span>
-                <span>${yearlyTotalExecutions.toLocaleString("es-AR")}</span>
-              </li>
+              {sortedObrasExecutions.length > 0 && (
+                <>
+                  <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
+                    <span>{searchTerm ? "Total Filtrado (Ejecución)" : `Total Ejecución (${year})`}</span>
+                    <span>${totalGeneralExecutions.toLocaleString("es-AR")}</span>
+                  </li>
+                  {!searchTerm && (
+                    <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
+                      <span>Total Anual ({year})</span>
+                      <span>${yearlyTotalExecutions.toLocaleString("es-AR")}</span>
+                    </li>
+                  )}
+                </>
+              )}
             </ul>
           )}
         </div>
