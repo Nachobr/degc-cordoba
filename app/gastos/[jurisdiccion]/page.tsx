@@ -19,6 +19,24 @@ interface SpendingDataItem {
 }
 
 export default function JurisdiccionDetail({ params }: { params: { jurisdiccion: string } }) {
+  // Add this with other state declarations at the top
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  // Add this with other useEffect hooks
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollButton(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const [spendingData, setSpendingData] = useState<SpendingDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -105,6 +123,10 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
     );
   }
 
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setSearchTerm(event.target.value);
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-blue-900 dark:text-white">
       <Navbar />
@@ -115,6 +137,33 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
         <p className="mb-6 text-sm md:text-base text-blue-900 dark:text-white">
           Desglose de sueldos para {month}/{year}.
         </p>
+
+        {/* Add search bar */}
+        <div className="max-w-md mx-auto mb-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Buscar por unidad, cargo..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="w-full p-2 pl-3 pr-10 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+            />
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+              />
+            </svg>
+          </div>
+        </div>
 
         <div className="flex justify-between items-center mb-4">
           <button
@@ -145,7 +194,13 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
                 </tr>
               </thead>
               <tbody>
-                {spendingData.map((item, index) => (
+                {spendingData
+                  .filter(item => 
+                    item.unidadOrganigrama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    item.unidadSuperior.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    item.cargo.toLowerCase().includes(searchTerm.toLowerCase())
+                  )
+                  .map((item, index) => (
                   <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                     <td className="p-2 border dark:border-gray-600">{item.unidadOrganigrama}</td>
                     <td className="p-2 border dark:border-gray-600 hidden md:table-cell">{item.unidadSuperior}</td>
@@ -161,10 +216,48 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
                 ))}
               </tbody>
             </table>
+            
+            {/* Show message when no results found */}
+            {spendingData.filter(item => 
+              item.unidadOrganigrama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              item.unidadSuperior.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              item.cargo.toLowerCase().includes(searchTerm.toLowerCase())
+            ).length === 0 && (
+              <p className="text-center py-4 text-blue-900 dark:text-white">
+                No se encontraron resultados para la búsqueda.
+              </p>
+            )}
           </div>
         </div>
       </main>
       <Footer />
+      
+      {/* Add the floating button */}
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
+          aria-label="Scroll to top"
+        >
+          <div className="flex items-center gap-2">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M5 10l7-7m0 0l7 7m-7-7v18" 
+              />
+            </svg>
+            <span>Ir al principio</span>
+          </div>
+        </button>
+      )}
     </div>
   );
 }

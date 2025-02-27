@@ -15,7 +15,7 @@ async function fetchAndStoreSueldos() {
     const monthLimit = year === endYear ? endMonth : 12; // Stop at January 2025
     for (let month = year === startYear ? startMonth : 1; month <= monthLimit; month++) {
       const formattedMonth = String(month).padStart(2, "0");
-      const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=1000&page=1&sidx=invdate&sord=desc`;
+      const url = `https://transparencia.cba.gov.ar/HandlerSueldos.ashx?anio=${year}&mes=${formattedMonth}&rows=2000&page=1&sidx=invdate&sord=desc`;
       let attempts = 0;
 
       while (attempts < maxAttempts) {
