@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import sueldosData from "../data/sueldos.json"; 
+import sueldosData from "../data/sueldos.json";
+import executionsData from "../data/executions.json";
+import executionDetailsData from "../data/executionDetails.json";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -15,6 +17,24 @@ interface SpendingDataItem {
   contribucionesPatronales: number;
   year: number;
   month: string;
+}
+
+interface ExecutionDataItem {
+  obra: string;
+  idObra: number | null;
+  programa: string;
+  jurisdiccion: string;
+  objetoGasto: string;
+  beneficiario: string;
+  monto: number;
+  year: number;
+}
+
+interface TwitterPostItem {
+  text: string;
+  type: 'sueldo' | 'ejecucion';
+  amount: number;
+  date: string;
 }
 
 export default function Home() {
@@ -52,19 +72,21 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center p-6">
        
-        <p className="text-lg text-center mb-6 text-blue-900 dark:text-white">
-          ¡Seguí el Gasto de Córdoba en Tiempo Real! Reduzcamos el desperdicio, aumentemos la eficiencia.
-        </p>
-
         <section className="w-full max-w-4xl mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-semibold">Gastos Recientes en Sueldos</h2>
-            <button
-              onClick={toggleSortOrder}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
+            <h2 className="text-2xl font-semibold">Gastos Recientes</h2>
+            <a 
+              href="https://x.com/DOGEargent" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+              aria-label="Twitter/X"
             >
-              Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
-            </button>
+              <span>Seguinos en</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
           </div>
           
           {loading ? (
@@ -90,9 +112,9 @@ export default function Home() {
                 >
                   <div>
                     <p className="font-medium">{item.jurisdiccion}</p>
-                    <p className="text-sm text-white-600">{item.cargo}</p>
-                    <p className="text-xs text-white-500">{item.unidadOrganigrama}</p>
-                    <p className="text-xs text-white-500">
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{item.cargo}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.unidadOrganigrama}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {item.month}/{item.year}
                     </p>
                   </div>
