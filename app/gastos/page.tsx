@@ -361,7 +361,7 @@ export default function Gastos() {
               onClick={toggleSortOrder}
               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
             >
-              Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
+              Ordenar {sortOrder === "asc" ? "Ascendente" : "Descendente"}
             </button>
           </div>
           {searchTerm && sortedJurisdiccionesSueldos.length === 0 && searchCategory !== "ejecucion" ? (
