@@ -51,9 +51,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-blue-900 dark:text-white">
       <Navbar />
       <main className="flex-1 flex flex-col items-center justify-center p-6">
-        <h1 className="text-4xl font-bold mb-4 text-center text-blue-900 dark:text-white">
-          Departamento de Eficiencia Gubernamental de Córdoba
-        </h1>
+       
         <p className="text-lg text-center mb-6 text-blue-900 dark:text-white">
           ¡Seguí el Gasto de Córdoba en Tiempo Real! Reduzcamos el desperdicio, aumentemos la eficiencia.
         </p>
@@ -68,6 +66,7 @@ export default function Home() {
               Ordenar {sortOrder === "desc" ? "Ascendente" : "Descendente"}
             </button>
           </div>
+          
           {loading ? (
             <p className="text-center text-blue-900 dark:text-white">Cargando datos...</p>
           ) : error ? (
@@ -109,11 +108,14 @@ export default function Home() {
           )}
         </section>
 
-        <div className="space-x-4">
-          <a href="/gastos" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+        <div className="flex flex-wrap justify-center gap-4 mb-6">
+          <a href="/gastos" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center">
             Ver Gastos
           </a>
-          <a href="/denuncias" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+          <a href="https://bsaenz.shinyapps.io/pauta-cordoba/" target="_blank" rel="noopener noreferrer" className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 text-center">
+            Gasto en Pauta Publicitaria
+          </a>
+          <a href="/denuncias" className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-center">
             Reportar Desperdicio
           </a>
         </div>
@@ -121,4 +123,8 @@ export default function Home() {
       <Footer />
     </div>
   );
+}
+
+function handleUserInteraction(this: Document, ev: MouseEvent) {
+  throw new Error("Function not implemented.");
 }
