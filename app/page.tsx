@@ -8,6 +8,7 @@ import executionsData from "../data/executions.json";
 import executionDetailsData from "../data/executionDetails.json";
 
 interface SpendingDataItem {
+  type: string;
   jurisdiccion: string;
   unidadOrganigrama: string;
   unidadSuperior: string;
@@ -30,9 +31,9 @@ interface ExecutionDataItem {
   year: number;
 }
 
-interface TwitterPostItem {
-  text: string;
-  type: 'sueldo' | 'ejecucion';
+interface TweetPost {
+  content: string;
+  type: "sueldo" | "ejecucion";
   amount: number;
   date: string;
 }
@@ -108,21 +109,25 @@ export default function Home() {
               {recentSpending.map((item, index) => (
                 <li
                   key={index}
-                  className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+                  className={`border rounded-lg p-4 ${item.type === "sueldo" ? "bg-blue-50 dark:bg-blue-900/30" : "bg-green-50 dark:bg-green-900/30"} hover:bg-opacity-80 dark:hover:bg-opacity-40`}
                 >
-                  <div>
-                    <p className="font-medium">{item.jurisdiccion}</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">{item.cargo}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.unidadOrganigrama}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {item.month}/{item.year}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-blue-900 dark:text-white">
-                      ${item.montoBruto.toLocaleString("es-AR")}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Monto Bruto</p>
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-1">
+                      {item.type === "sueldo" ? (
+                        <span className="text-xl">📊</span>
+                      ) : (
+                        <span className="text-xl">💸</span>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-blue-900 dark:text-white mb-2">{item.jurisdiccion} - {item.cargo}</p>
+                      <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
+                        <span>{item.month}/{item.year}</span>
+                        <span className="font-semibold text-blue-900 dark:text-blue-300">
+                          ${item.montoBruto.toLocaleString("es-AR")}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </li>
               ))}

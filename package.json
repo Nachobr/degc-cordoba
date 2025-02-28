@@ -8,12 +8,14 @@
     "build": "mkdir -p public/data && echo '{\"2024\":{\"12\":[]}}' > public/data/gastos.json && next build",
     "start": "next start",
     "lint": "next lint",
-    "worker": "tsx workers/fetchGastos.ts"
+    "worker": "tsx workers/fetchGastos.ts",
+    "twitter-bot": "tsx scripts/twitter-bot.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "axios": "^1.7.9",
     "chart.js": "^4.4.8",
+    "dotenv": "^16.4.7",
     "fast-xml-parser": "^5.0.6",
     "next": "14.1.0",
     "node-fetch": "^3.3.2",
@@ -21,7 +23,8 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^5.0.0",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "twitter-api-v2": "^1.20.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
