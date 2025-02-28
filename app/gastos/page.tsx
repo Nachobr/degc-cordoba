@@ -8,6 +8,7 @@ import sueldosData from "../../data/sueldos.json";
 import executionsData from "../../data/executions.json";
 import executionDetailsData from "../../data/executionDetails.json";
 import { useRouter, useSearchParams } from "next/navigation";
+import { calculateJurisdiccionTotals } from "../utils/calculateTotals";
 
 interface SpendingDataItem {
   jurisdiccion: string;
@@ -41,13 +42,14 @@ interface ExecutionDetailItem {
   pagado: number;
 }
 
+
 export default function Gastos() {
   const [spendingData, setSpendingData] = useState<SpendingDataItem[]>([]);
   const [executionData, setExecutionData] = useState<ExecutionDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedYear, setSelectedYear] = useState("2025");  // New state for temporary year selection
-  const [selectedMonth, setSelectedMonth] = useState("01");  // New state for temporary month selection
+  const [selectedYear, setSelectedYear] = useState("2025");  
+  const [selectedMonth, setSelectedMonth] = useState("01");  
   const [year, setYear] = useState("2025");
   const [month, setMonth] = useState("01");
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc");
@@ -58,16 +60,12 @@ export default function Gastos() {
   // Estados para datos filtrados
   const [filteredSpendingData, setFilteredSpendingData] = useState<SpendingDataItem[]>([]);
   const [filteredExecutionData, setFilteredExecutionData] = useState<ExecutionDataItem[]>([]);
-  
+  const [viewType, setViewType] = useState<'annual' | 'monthly'>('monthly');
+
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const urlYear = searchParams.get('year') || '2025';
-
-  useEffect(() => {
-    setSelectedYear(urlYear);
-    setYear(urlYear);
-  }, [urlYear]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -151,9 +149,9 @@ export default function Gastos() {
 
     // Filtrar datos de sueldos si la categoría es "all" o "sueldos"
     if (searchCategory === "all" || searchCategory === "sueldos") {
-      const filtered = spendingData.filter(item => 
-        item.jurisdiccion.toLowerCase().includes(term) || 
-        item.unidadOrganigrama.toLowerCase().includes(term) || 
+      const filtered = spendingData.filter(item =>
+        item.jurisdiccion.toLowerCase().includes(term) ||
+        item.unidadOrganigrama.toLowerCase().includes(term) ||
         item.cargo.toLowerCase().includes(term)
       );
       setFilteredSpendingData(filtered);
@@ -164,9 +162,9 @@ export default function Gastos() {
 
     // Filtrar datos de ejecución si la categoría es "all" o "ejecucion"
     if (searchCategory === "all" || searchCategory === "ejecucion") {
-      const filtered = executionData.filter(item => 
-        item.obra.toLowerCase().includes(term) || 
-        item.programa.toLowerCase().includes(term) || 
+      const filtered = executionData.filter(item =>
+        item.obra.toLowerCase().includes(term) ||
+        item.programa.toLowerCase().includes(term) ||
         item.jurisdiccion.toLowerCase().includes(term) ||
         item.beneficiario.toLowerCase().includes(term)
       );
@@ -217,18 +215,30 @@ export default function Gastos() {
       .reduce((sum, item: ExecutionDataItem) => sum + item.monto, 0)
     : 0;
 
-  const sortedJurisdiccionesSueldos = Object.entries(groupedByJurisdiccionSueldos).sort((a, b) =>
-    sortOrder === "desc"
-      ? b[1].totalMontoBruto - a[1].totalMontoBruto
-      : a[1].totalMontoBruto - b[1].totalMontoBruto
-  );
-
+  const sortedJurisdiccionesSueldos = Object.entries(groupedByJurisdiccionSueldos).sort((a, b) => {
+    const totalsA = calculateJurisdiccionTotals(
+      a[0],
+      year,
+      viewType === 'monthly' ? month : undefined
+    );
+    
+    const totalsB = calculateJurisdiccionTotals(
+      b[0],
+      year,
+      viewType === 'monthly' ? month : undefined
+    );
+    
+    return sortOrder === "desc"
+      ? totalsB.total - totalsA.total
+      : totalsA.total - totalsB.total;
+  });
+/*
   const sortedObrasExecutions = Object.entries(groupedByObraExecutions).sort((a, b) =>
     sortOrder === "desc"
       ? b[1].totalMonto - a[1].totalMonto
       : a[1].totalMonto - b[1].totalMonto
   );
-
+*/
   const toggleSortOrder = () => {
     setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
   };
@@ -254,6 +264,8 @@ export default function Gastos() {
     );
   }
 
+
+
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-blue-900 dark:text-white">
       <Navbar />
@@ -266,56 +278,33 @@ export default function Gastos() {
         </p>
 
         <div className="mb-6 flex flex-col gap-4">
-          {/* Date selection controls */}
-          <div className="flex flex-wrap items-center gap-4 justify-center">
-            <div className="flex items-center">
-              <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
-                Año:
-              </label>
-              <select
-                id="year"
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="p-2 border dark:border-gray-600 rounded w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+          {/* View selection control */}
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => {
+                  setViewType('annual');
+                }}
+                className={`px-4 py-2 rounded-l-lg ${viewType === 'annual'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-white dark:bg-gray-800'
+                  }`}
               >
-                {Array.from({ length: 3 }, (_, i) => 2023 + i).map((y) => (
-                  <option key={y} value={y}>{y}</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex items-center">
-              <label htmlFor="month" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
-                Mes:
-              </label>
-              <select
-                id="month"
-                value={selectedMonth}
-                onChange={(e) => setSelectedMonth(e.target.value)}
-                className="p-2 border dark:border-gray-600 rounded w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+                Vista Anual
+              </button>
+              <button
+                onClick={() => setViewType('monthly')}
+                className={`px-4 py-2 rounded-r-lg ${viewType === 'monthly'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-white dark:bg-gray-800'
+                  }`}
               >
-                <option value="01">Enero</option>
-                <option value="02">Febrero</option>
-                <option value="03">Marzo</option>
-                <option value="04">Abril</option>
-                <option value="05">Mayo</option>
-                <option value="06">Junio</option>
-                <option value="07">Julio</option>
-                <option value="08">Agosto</option>
-                <option value="09">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-              </select>
+                Vista Mensual
+              </button>
             </div>
-            <button
-              onClick={handleDateChange}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-            >
-              Cambiar fecha
-            </button>
           </div>
-          
-          {/* Search bar - now centered */}
+
+          {/* Search bar - add this section */}
           <div className="flex items-center gap-2 max-w-md mx-auto w-full">
             <div className="relative flex-1">
               <input
@@ -325,18 +314,18 @@ export default function Gastos() {
                 onChange={handleSearchChange}
                 className="w-full p-2 pl-3 pr-10 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
               />
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" 
-                fill="none" 
-                viewBox="0 0 24 24" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
             </div>
@@ -350,116 +339,156 @@ export default function Gastos() {
               <option value="ejecucion">Ejecución</option>
             </select>
           </div>
-        </div>
 
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl md:text-2xl font-semibold text-blue-900 dark:text-white">
-              Totales por Jurisdicción (Sueldos)
-            </h2>
-            <button
-              onClick={toggleSortOrder}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors text-sm"
-            >
-              Ordenar {sortOrder === "asc" ? "Ascendente" : "Descendente"}
-            </button>
-          </div>
-          {searchTerm && sortedJurisdiccionesSueldos.length === 0 && searchCategory !== "ejecucion" ? (
-            <p className="text-center text-blue-900 dark:text-white">
-              No se encontraron resultados para la búsqueda en sueldos.
-            </p>
-          ) : filteredSpendingData.length === 0 && !searchTerm ? (
-            <p className="text-center text-blue-900 dark:text-white">
-              No hay datos de sueldos disponibles para este período.
-            </p>
-          ) : (
-            <ul className="space-y-4">
-              {sortedJurisdiccionesSueldos.map(([jurisdiccion, { totalMontoBruto }]) => (
-                <li
-                  key={jurisdiccion}
-                  className="border dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center"
+          {/* Conditional date controls */}
+          {viewType === 'monthly' ? (
+            <div className="flex flex-wrap items-center gap-4 justify-center">
+              <div className="flex items-center">
+                <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
+                  Año:
+                </label>
+                <select
+                  id="year"
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                  className="p-2 border dark:border-gray-600 rounded w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
                 >
-                  <Link
-                    href={`/gastos/${encodeURIComponent(jurisdiccion)}?year=${year}&month=${month}`}
-                    className="font-medium text-blue-900 dark:text-white hover:underline"
-                  >
-                    {jurisdiccion}
-                  </Link>
-                  <span className="font-semibold text-blue-900 dark:text-white">
-                    ${totalMontoBruto.toLocaleString("es-AR")}
-                  </span>
-                </li>
-              ))}
-              {sortedJurisdiccionesSueldos.length > 0 && (
-                <>
-                  <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
-                    <span>{searchTerm ? "Total Filtrado (Sueldos)" : "Total Mensual (Sueldos)"}</span>
-                    <span>${totalGeneralSueldos.toLocaleString("es-AR")}</span>
-                  </li>
-                  {!searchTerm && (
-                    <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
-                      <span>{yearlyTotalLabel} (Sueldos)</span>
-                      <span>${yearlyPartialTotalSueldos.toLocaleString("es-AR")}</span>
-                    </li>
-                  )}
-                </>
-              )}
-            </ul>
+                  {Array.from({ length: 3 }, (_, i) => 2023 + i).map((y) => (
+                    <option key={y} value={y}>{y}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center">
+                <label htmlFor="month" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
+                  Mes:
+                </label>
+                <select
+                  id="month"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                  className="p-2 border dark:border-gray-600 rounded w-full sm:w-auto bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+                >
+                  <option value="01">Enero</option>
+                  <option value="02">Febrero</option>
+                  <option value="03">Marzo</option>
+                  <option value="04">Abril</option>
+                  <option value="05">Mayo</option>
+                  <option value="06">Junio</option>
+                  <option value="07">Julio</option>
+                  <option value="08">Agosto</option>
+                  <option value="09">Septiembre</option>
+                  <option value="10">Octubre</option>
+                  <option value="11">Noviembre</option>
+                  <option value="12">Diciembre</option>
+                </select>
+              </div>
+              <button
+                onClick={handleDateChange}
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+              >
+                Cambiar fecha
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center">
+              <label htmlFor="year" className="mr-2 text-sm md:text-base text-blue-900 dark:text-white">
+                Año:
+              </label>
+              <select
+                id="year"
+                value={selectedYear}
+                onChange={(e) => {
+                  setSelectedYear(e.target.value);
+                  setYear(e.target.value);
+                  router.push(`/gastos?year=${e.target.value}`);
+                }}
+                className="p-2 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+              >
+                {Array.from({ length: 3 }, (_, i) => 2023 + i).map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+            </div>
           )}
         </div>
 
+        {/* In the data display section */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl md:text-2xl font-semibold text-blue-900 dark:text-white">
-              Totales por Obra (Ejecución Presupuestaria)
+            <h2 className="text-xl md:text-2xl font-semibold">
+              {viewType === 'annual'
+                ? `Totales Anuales por Jurisdicción (${year})`
+                : `Totales Mensuales por Jurisdicción (${month}/${year})`
+              }
             </h2>
-          </div>
-          {searchTerm && sortedObrasExecutions.length === 0 && searchCategory !== "sueldos" ? (
-            <p className="text-center text-blue-900 dark:text-white">
-              No se encontraron resultados para la búsqueda en ejecución presupuestaria.
-            </p>
-          ) : filteredExecutionData.length === 0 && !searchTerm ? (
-            <p className="text-center text-blue-900 dark:text-white">
-              No hay datos de ejecución presupuestaria disponibles para este año.
-            </p>
-          ) : (
-            <ul className="space-y-4">
-              {sortedObrasExecutions.map(([obra, { totalMonto, idObra }]) => (
-                <Link
-                  key={obra}
-                  href={`/gastos/obra/${idObra}?year=${year}`}
-                  className="block"
-                >
-                  <li className="border dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 flex justify-between items-center">
-                    <span className="font-medium text-blue-900 dark:text-white">
-                      {obra}
-                    </span>
-                    <span className="font-semibold text-blue-900 dark:text-white">
-                      ${totalMonto.toLocaleString("es-AR")}
-                    </span>
-                  </li>
-                </Link>
-              ))}
-              {sortedObrasExecutions.length > 0 && (
-                <>
-                  <li className="border rounded-lg p-4 bg-blue-100 dark:bg-blue-900 flex justify-between items-center font-bold">
-                    <span>{searchTerm ? "Total Filtrado (Ejecución)" : `Total Ejecución (${year})`}</span>
-                    <span>${totalGeneralExecutions.toLocaleString("es-AR")}</span>
-                  </li>
-                  {!searchTerm && (
-                    <li className="border rounded-lg p-4 bg-green-100 dark:bg-green-900 flex justify-between items-center font-bold">
-                      <span>Total Anual ({year})</span>
-                      <span>${yearlyTotalExecutions.toLocaleString("es-AR")}</span>
-                    </li>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <div className="text-sm text-gray-500">Total General</div>
+                <div className="font-semibold text-lg">
+                  ${sortedJurisdiccionesSueldos.reduce((acc, [jurisdiccion]) => {
+                    const totals = calculateJurisdiccionTotals(
+                      jurisdiccion,
+                      year,
+                      viewType === 'monthly' ? month : undefined
+                    );
+                    return acc + totals.total;
+                  }, 0).toLocaleString("es-AR")}
+                </div>
+              </div>
+              <button
+                onClick={toggleSortOrder}
+                className="text-sm text-blue-600 dark:text-blue-400 flex items-center"
+              >
+                {sortOrder === "desc" ? "Mayor a menor" : "Menor a mayor"}
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {sortOrder === "desc" ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                   )}
-                </>
-              )}
-            </ul>
-          )}
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <ul className="space-y-4">
+            {sortedJurisdiccionesSueldos.map(([jurisdiccion]) => (
+              <li key={jurisdiccion} className="border rounded-lg p-4">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <Link
+                      href={`/gastos/${encodeURIComponent(jurisdiccion)}?year=${year}${viewType === 'monthly' ? `&month=${month}` : ''}`}
+                      className="font-medium hover:underline"
+                    >
+                      {jurisdiccion}
+                    </Link>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold">
+                      ${(() => {
+                        const totals = calculateJurisdiccionTotals(
+                          jurisdiccion,
+                          year,
+                          viewType === 'monthly' ? month : undefined
+                        );
+                        return totals.total.toLocaleString("es-AR");
+                      })()}
+                    </div>
+                    {viewType === 'annual' && (
+                      <div className="text-sm text-gray-500">
+                        Total anual
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
+
       </main>
       <Footer />
-      
+
       {/* Add the floating button */}
       {showScrollButton && (
         <button
@@ -468,18 +497,18 @@ export default function Gastos() {
           aria-label="Scroll to top"
         >
           <div className="flex items-center gap-2">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5" 
-              fill="none" 
-              viewBox="0 0 24 24" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M5 10l7-7m0 0l7 7m-7-7v18" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
               />
             </svg>
             <span>Ir al principio</span>
