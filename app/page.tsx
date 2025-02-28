@@ -48,6 +48,10 @@ export default function Home() {
     try {
       const sortedData = Array.isArray(sueldosData)
         ? [...sueldosData]
+            .map(item => ({
+              ...item,
+              type: "sueldo" // Add the required type property
+            }))
             .sort((a, b) =>
               sortOrder === "asc"
                 ? b.montoBruto - a.montoBruto
@@ -62,7 +66,7 @@ export default function Home() {
       setError("Error al procesar los datos");
       setLoading(false);
     }
-  }, [sortOrder]); // Dependencia en sortOrder para reordenar al cambiar
+  }, [sortOrder]);
 
   const toggleSortOrder = () => {
     setSortOrder((prev) => (prev === "desc" ? "asc" : "desc"));
