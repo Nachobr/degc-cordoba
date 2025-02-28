@@ -103,7 +103,6 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
             sortOrder === "asc" ? b.montoBruto - a.montoBruto : a.montoBruto - b.montoBruto
           )
         : [];
-      console.log("Filtered Sueldos:", filteredSueldos);
       setSpendingData(filteredSueldos);
       setTotalSueldos(filteredSueldos.reduce((sum, item) => sum + item.montoBruto, 0));
 
@@ -131,7 +130,9 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
         .map(execution => ({
           ...execution,
           pagado: detailsMap.get(execution.idObra || 0)?.pagado || 0
-        }));
+        })).sort((a, b) =>
+          sortOrder === "asc" ? (b.pagado || 0) - (a.pagado || 0) : (a.pagado || 0) - (b.pagado || 0)
+        );
 
       setExecutionData(filteredExecutions);
 
@@ -300,28 +301,62 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
         )}
 
         {activeTab === 'ejecuciones' && (
-          <div className="overflow-x-auto">
-            <table className="min-w-full border-collapse text-sm">
-              <thead>
-                <tr className="bg-blue-100 dark:bg-blue-900">
-                  <th className="p-2 border dark:border-gray-600 text-left">Obra</th>
-                  <th className="p-2 border dark:border-gray-600 text-left">Programa</th>
-                  <th className="p-2 border dark:border-gray-600 text-right">Monto Pagado</th>
-                </tr>
-              </thead>
-              <tbody>
-                {executionData.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                    <td className="p-2 border dark:border-gray-600">{item.obra}</td>
-                    <td className="p-2 border dark:border-gray-600">{item.programa}</td>
-                    <td className="p-2 border dark:border-gray-600 text-right">
-                      ${item.pagado?.toLocaleString('es-AR')}
-                    </td>
+          <>
+            {/* Add search input for ejecuciones */}
+            <div className="max-w-md mx-auto mb-6">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar por obra, programa..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="w-full p-2 pl-3 pr-10 border dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-blue-900 dark:text-white"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-blue-100 dark:bg-blue-900">
+                    <th className="p-2 border dark:border-gray-600 text-left">Obra</th>
+                    <th className="p-2 border dark:border-gray-600 text-left">Programa</th>
+                    <th className="p-2 border dark:border-gray-600 text-right">Monto Pagado</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {executionData
+                    .filter(item =>
+                      item.obra.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                      item.programa.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                    .map((item, index) => (
+                      <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <td className="p-2 border dark:border-gray-600">{item.obra}</td>
+                        <td className="p-2 border dark:border-gray-600">{item.programa}</td>
+                        <td className="p-2 border dark:border-gray-600 text-right">
+                          ${item.pagado?.toLocaleString('es-AR')}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </main>
       <Footer />
