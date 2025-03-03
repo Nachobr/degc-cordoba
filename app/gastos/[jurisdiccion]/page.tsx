@@ -44,6 +44,24 @@ interface ExecutionDetailItem {
   pagado: number;
 }
 
+function removeDuplicates(data: (ExecutionDataItem & { pagado?: number })[]) {
+  const uniqueData = new Map<string, ExecutionDataItem & { pagado?: number }>();
+
+  data.forEach(item => {
+    const key = `${item.obra}-${item.programa}-${item.pagado}`;
+    if (uniqueData.has(key)) {
+      const existingItem = uniqueData.get(key);
+      if (existingItem) {
+        existingItem.jurisdiccion += " (both)";
+      }
+    } else {
+      uniqueData.set(key, { ...item });
+    }
+  });
+
+  return Array.from(uniqueData.values());
+}
+
 export default function JurisdiccionDetail({ params }: { params: { jurisdiccion: string } }) {
   // Add this with other state declarations at the top
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -130,11 +148,14 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
         .map(execution => ({
           ...execution,
           pagado: detailsMap.get(execution.idObra || 0)?.pagado || 0
-        })).sort((a, b) =>
+        }))
+        .sort((a, b) =>
           sortOrder === "asc" ? (b.pagado || 0) - (a.pagado || 0) : (a.pagado || 0) - (b.pagado || 0)
         );
 
-      setExecutionData(filteredExecutions);
+      // Remove duplicates
+      const uniqueExecutions = removeDuplicates(filteredExecutions);
+      setExecutionData(uniqueExecutions);
 
       // Calculate total executions from the matching details directly
       const totalPagado = matchingDetails.reduce((sum, item) => sum + item.pagado, 0);
