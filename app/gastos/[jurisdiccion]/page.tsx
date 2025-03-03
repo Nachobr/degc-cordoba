@@ -84,7 +84,7 @@ export default function JurisdiccionDetail({ params }: { params: { jurisdiccion:
   const [spendingData, setSpendingData] = useState<SpendingDataItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc"); // Estado para ordenamiento
+  const [sortOrder, setSortOrder] = useState<"desc" | "asc">("asc"); // Estado para ordenamiento
   const router = useRouter();
   const { jurisdiccion } = params;
 
