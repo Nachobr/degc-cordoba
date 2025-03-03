@@ -6,10 +6,52 @@ import { useState } from 'react';
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVotacionesOpen, setIsVotacionesOpen] = useState(false);
+  // Add a new state for mobile votaciones dropdown
+  const [isMobileVotacionesOpen, setIsMobileVotacionesOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Add this after the existing Desktop menu links
+  const VotacionesDropdown = () => (
+    <div className="relative">
+      <button
+        onClick={() => setIsVotacionesOpen(!isVotacionesOpen)}
+        className="text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
+      >
+        Votaciones Nacionales
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {isVotacionesOpen && (
+        <div className="absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5">
+          <div className="py-1">
+            <a
+              href="https://senadores.argentinadatos.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-2 text-sm text-blue-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900"
+              onClick={() => setIsVotacionesOpen(false)}
+            >
+              Votaciones Senadores
+            </a>
+            <a
+              href="https://diputados.argentinadatos.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-2 text-sm text-blue-900 dark:text-white hover:bg-blue-50 dark:hover:bg-blue-900"
+              onClick={() => setIsVotacionesOpen(false)}
+            >
+              Votaciones Diputados
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-md p-4 md:px-6 lg:px-8">
@@ -64,10 +106,10 @@ export default function Navbar() {
           >
             Pauta Publicitaria
           </a>
+          <VotacionesDropdown />
           <Link href="/denuncias" className="text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium">
             Denuncias
           </Link>
-
           <button
             onClick={toggleTheme}
             className="text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-sm font-medium"
@@ -79,9 +121,9 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu, show/hide based on menu state */}
+      {/* Update the mobile menu section */}
       <div className={`${isMenuOpen ? 'block' : 'hidden'} sm:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-
           <Link
             href="/gastos"
             className="block text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-base font-medium"
@@ -98,6 +140,45 @@ export default function Navbar() {
           >
             Pauta Publicitaria
           </a>
+          
+          {/* Replace the old votaciones section with this new dropdown */}
+          <div>
+            <button
+              onClick={() => setIsMobileVotacionesOpen(!isMobileVotacionesOpen)}
+              className="w-full text-left text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-base font-medium flex items-center justify-between"
+            >
+              <span>Votaciones Nacionales</span>
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className={`h-4 w-4 transform transition-transform ${isMobileVotacionesOpen ? 'rotate-180' : ''}`} 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className={`${isMobileVotacionesOpen ? 'block' : 'hidden'} pl-4`}>
+              <a
+                href="https://senadores.argentinadatos.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Votaciones Senadores
+              </a>
+              <a
+                href="https://diputados.argentinadatos.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Votaciones Diputados
+              </a>
+            </div>
+          </div>
           <Link
             href="/denuncias"
             className="block text-blue-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 px-3 py-2 rounded-md text-base font-medium"
