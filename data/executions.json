@@ -13910,26 +13910,6 @@
     "year": 2025
   },
   {
-    "obra": "1868 - Ampliación Area De Quemados Y Ucco Y Refuncionalizacion - H. De Niños Stma Trinidad  - Cordoba",
-    "idObra": 1906,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "1881 - Ampliación Obras Varias Sin Discriminar Capítal E Interior  - Cordoba",
-    "idObra": 1919,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
     "obra": "1882 - Ampliación Obras Varias Sin Discriminar Para Salud Mental Capital E Interior - Cordoba",
     "idObra": 1920,
     "programa": "Sin Programa",
@@ -14052,26 +14032,6 @@
   {
     "obra": "2497 - Señalización Prog.De Seg. Vial- Region C - Dptos:Calamuchita-Rio Iv-Gral. San Martin-Roque Saenz Peña-Juarez Celman-Marcos Juarez",
     "idObra": 2569,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "2535 - Remodelación Y Refuncionalizacion Integral Hospital San Roque - Cordoba",
-    "idObra": 2611,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "2554 - Remodelación Y Refuncionalizacion Hospital Jesus Maria",
-    "idObra": 2630,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
@@ -15560,6 +15520,16 @@
     "year": 2025
   },
   {
+    "obra": "5738 - Refuncionalización  Ex Hospital Zonal Rio Tercero Para Comunidad Terapeutica  Rio Tercero",
+    "idObra": 6947,
+    "programa": "Sin Programa",
+    "jurisdiccion": "Sin Jurisdicción",
+    "objetoGasto": "Sin Objeto",
+    "beneficiario": "Sin Beneficiario",
+    "monto": 0,
+    "year": 2025
+  },
+  {
     "obra": "5751 - Pavimentación Ruta Provincial S-390. Tramo: Intersección Ruta Provincial N° 10 - Calchin Oeste. Departamento: Rio Segundo",
     "idObra": 6971,
     "programa": "Sin Programa",
@@ -16800,16 +16770,6 @@
     "year": 2025
   },
   {
-    "obra": "6651 - Refacción Hosp. Laboulaye, Ampliac Edificio Para Administracion Y Nuevo Lavadero Cordoba, Pte Roque S.Peña, Laboulaye",
-    "idObra": 8381,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
     "obra": "6655 - Refacción Hosp. Neonatal, Remodelacion Centro Obstetrico Para Utpr Cordoba, Capital, Cordoba",
     "idObra": 8387,
     "programa": "Sin Programa",
@@ -16840,16 +16800,6 @@
     "year": 2025
   },
   {
-    "obra": "6658 - Refacción Hosp. Pediatrico, Remodelacion Integral Laboratorio Cordoba, Capital, Cordob",
-    "idObra": 8393,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
     "obra": "6660 - Refacción Hosp. Sta Maria De Punilla, Edificio Direccion Reemplazo Techo De Teja Por Chapa Y Acondicionamiento Edilicio General. Cordoba, Punilla, Sta Maria",
     "idObra": 8397,
     "programa": "Sin Programa",
@@ -16862,16 +16812,6 @@
   {
     "obra": "6661 - Refacción Hosp. Sta Rosa De Calamuchita, Remodelacion Y Ampliacion Centro Obstetrico Y Utpr Cordoba, Calamuchita, Sta Rosa De Calamuchita",
     "idObra": 8398,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "6662 - Refacción Hosp. Pediatrico, Obra Nuevo Vacunatorio Cordoba, Capital, Cordoba",
-    "idObra": 8399,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
@@ -17390,28 +17330,8 @@
     "year": 2025
   },
   {
-    "obra": "7097 - Ampliación Ampliación Frente Y Playa De Estacionamiento En El Edificio Del Ministerio De Producción, Ciencia E Innovación Tecnológica.\r\n Belgrano 347, B° Centro, Ciudad De Córdoba.",
-    "idObra": 9171,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
     "obra": "7098 - Ampliación Ampliación De Oficinas De La Secretaria De Ciencia Y Tecnología, Del Ministerio De Producción, Ciencia E Innovación Tecnológica.\r\n Av. Alvarez De Arenales 250, B° General Paz, Ciudad De Córdoba.",
     "idObra": 9173,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "7099 - A Determinar Obra Sin Discriminar. Ministerio De Producción, Ciencia E Innovación Tecnológica.",
-    "idObra": 9175,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
@@ -17700,16 +17620,6 @@
     "year": 2025
   },
   {
-    "obra": "7375 - Remodelación Integral Cocina - Hospital Vicente Agüero Jesus Maria",
-    "idObra": 9717,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
     "obra": "7376 - Remodelación Integral Cocina Y Area De Servicios - Hospital De Niños Co0rdoba",
     "idObra": 9719,
     "programa": "Sin Programa",
@@ -17742,26 +17652,6 @@
   {
     "obra": "7381 - Construcción Obra De Captación, Reacondicionamiento, Bombeo Y Distribucion De Agua Potable Cantera S El Sauce. Comuna De El Manzano",
     "idObra": 9728,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "7383 - Readecuación Sanatorizacion Pabellones 2,3 Y 4 - Hogar Elpidio Gonzalez Despeñaderos",
-    "idObra": 9731,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "7384 - Ejecución Demolicion Edificios Obsoletos En Riesgo - Colina Santa Maria Punilla",
-    "idObra": 9733,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
@@ -17912,16 +17802,6 @@
   {
     "obra": "7404 - Mejoramiento Mejoramiento S-325 Isla Verde - Guatimozin \r\n Mejoramiento S-325 Isla Verde - Guatimozin \r\n",
     "idObra": 9773,
-    "programa": "Sin Programa",
-    "jurisdiccion": "Sin Jurisdicción",
-    "objetoGasto": "Sin Objeto",
-    "beneficiario": "Sin Beneficiario",
-    "monto": 0,
-    "year": 2025
-  },
-  {
-    "obra": "7405 - Refacción Nuevo Tgbt E Instalacion Electrica General - Centro Psico Asistencial Cordoba",
-    "idObra": 9775,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
@@ -18422,6 +18302,16 @@
   {
     "obra": "7662 - Construcción Dos (2) Centros Deportivos, Recreativos Y Sociales En La Ciudad De San Francisco",
     "idObra": 10231,
+    "programa": "Sin Programa",
+    "jurisdiccion": "Sin Jurisdicción",
+    "objetoGasto": "Sin Objeto",
+    "beneficiario": "Sin Beneficiario",
+    "monto": 0,
+    "year": 2025
+  },
+  {
+    "obra": "7671 - Readecuación Inmueble Para Oficinas En La Direccion De Defensa Del Consumidor Y Lealtad Comercial  Colón 724 - Córdoba Capital",
+    "idObra": 10243,
     "programa": "Sin Programa",
     "jurisdiccion": "Sin Jurisdicción",
     "objetoGasto": "Sin Objeto",
