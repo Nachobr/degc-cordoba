@@ -5661,7 +5661,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1657025000,
     "devengado": 1435473669,
-    "pagado": 1424356911
+    "pagado": 1435473669
   },
   {
     "idObra": 409,
@@ -6013,7 +6013,7 @@
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 3134400000,
     "devengado": 2735152968,
-    "pagado": 2733195781
+    "pagado": 2734492968
   },
   {
     "idObra": 2260,
@@ -6085,7 +6085,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 233101000,
     "devengado": 21566053,
-    "pagado": 0
+    "pagado": 21566053
   },
   {
     "idObra": 2614,
@@ -6325,7 +6325,7 @@
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 1198295000,
     "devengado": 816096960,
-    "pagado": 765045594
+    "pagado": 816096960
   },
   {
     "idObra": 3729,
@@ -6533,7 +6533,7 @@
     "jurisdiccion": "35 - Servicio Penitenciario",
     "creditoVigente": 21311000,
     "devengado": 21310450,
-    "pagado": 3582500
+    "pagado": 21310450
   },
   {
     "idObra": 4777,
@@ -9573,7 +9573,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 1426751000,
     "devengado": 1298228783,
-    "pagado": 1195809972
+    "pagado": 1298228783
   },
   {
     "idObra": 7730,
@@ -11060,8 +11060,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2785137000,
-    "devengado": 237863656,
-    "pagado": 237863656
+    "devengado": 481468002,
+    "pagado": 481468002
   },
   {
     "idObra": 383,
@@ -11076,8 +11076,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1200000000,
-    "devengado": 82886409,
-    "pagado": 0
+    "devengado": 227660369,
+    "pagado": 144276826
   },
   {
     "idObra": 409,
@@ -11124,8 +11124,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 300000000,
-    "devengado": 16623034,
-    "pagado": 10743339
+    "devengado": 18926085,
+    "pagado": 16623034
   },
   {
     "idObra": 448,
@@ -11140,24 +11140,24 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1835995000,
-    "devengado": 149931131,
-    "pagado": 149931131
+    "devengado": 304532345,
+    "pagado": 304532345
   },
   {
     "idObra": 450,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 600000000,
-    "devengado": 23291566,
-    "pagado": 23182057
+    "devengado": 88381438,
+    "pagado": 26712452
   },
   {
     "idObra": 451,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 150000000,
-    "devengado": 3378095,
-    "pagado": 2031799
+    "devengado": 6013275,
+    "pagado": 2768095
   },
   {
     "idObra": 455,
@@ -11172,24 +11172,24 @@
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
     "creditoVigente": 12570000000,
-    "devengado": 3634125665,
-    "pagado": 3634125665
+    "devengado": 5205624611,
+    "pagado": 5083356949
   },
   {
     "idObra": 457,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1149227000,
-    "devengado": 55928014,
-    "pagado": 55928014
+    "devengado": 113749057,
+    "pagado": 113749057
   },
   {
     "idObra": 458,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 120000000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 8616383,
+    "pagado": 8616383
   },
   {
     "idObra": 459,
@@ -11204,15 +11204,15 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 500000000,
-    "devengado": 25802124,
-    "pagado": 0
+    "devengado": 29742296,
+    "pagado": 29742296
   },
   {
     "idObra": 461,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 142000000,
-    "devengado": 0,
+    "devengado": 146000,
     "pagado": 0
   },
   {
@@ -11237,7 +11237,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 179800000,
     "devengado": 179798,
-    "pagado": 0
+    "pagado": 158866
   },
   {
     "idObra": 752,
@@ -11267,7 +11267,7 @@
     "idObra": 774,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 256000000,
+    "creditoVigente": 185140000,
     "devengado": 0,
     "pagado": 0
   },
@@ -11302,22 +11302,6 @@
     "creditoVigente": 400480000,
     "devengado": 123866056,
     "pagado": 123866056
-  },
-  {
-    "idObra": 1906,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 351733000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 1919,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 285212000,
-    "devengado": 0,
-    "pagado": 0
   },
   {
     "idObra": 1920,
@@ -11355,15 +11339,15 @@
     "idObra": 2052,
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
-    "creditoVigente": 43500000,
-    "devengado": 0,
+    "creditoVigente": 81500000,
+    "devengado": 961840,
     "pagado": 0
   },
   {
     "idObra": 2246,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 96887000,
+    "creditoVigente": 87000,
     "devengado": 0,
     "pagado": 0
   },
@@ -11380,16 +11364,16 @@
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 16947500000,
-    "devengado": 720212431,
-    "pagado": 331741777
+    "devengado": 777581941,
+    "pagado": 684718735
   },
   {
     "idObra": 2260,
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
-    "creditoVigente": 1651700000,
-    "devengado": 84942136,
-    "pagado": 19602423
+    "creditoVigente": 1613700000,
+    "devengado": 180321968,
+    "pagado": 84942136
   },
   {
     "idObra": 2292,
@@ -11397,47 +11381,31 @@
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 1500000000,
     "devengado": 58602356,
-    "pagado": 0
+    "pagado": 58095783
   },
   {
     "idObra": 2566,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 3527380000,
-    "devengado": 423333669,
-    "pagado": 0
+    "devengado": 967517268,
+    "pagado": 423333669
   },
   {
     "idObra": 2567,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 3527380000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 397730050,
+    "pagado": 101454744
   },
   {
     "idObra": 2569,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 3527380000,
-    "devengado": 94273358,
-    "pagado": 0
-  },
-  {
-    "idObra": 2611,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 148695000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 2630,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 137370000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 529198636,
+    "pagado": 94273358
   },
   {
     "idObra": 2658,
@@ -11540,8 +11508,8 @@
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 2609800000,
-    "devengado": 596829597,
-    "pagado": 442586716
+    "devengado": 804198029,
+    "pagado": 633803464
   },
   {
     "idObra": 3344,
@@ -11555,7 +11523,7 @@
     "idObra": 3348,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 234198000,
+    "creditoVigente": 84198000,
     "devengado": 0,
     "pagado": 0
   },
@@ -11588,8 +11556,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 83020000,
-    "devengado": 57913648,
-    "pagado": 0
+    "devengado": 67882223,
+    "pagado": 57913648
   },
   {
     "idObra": 3661,
@@ -11612,8 +11580,8 @@
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 500000000,
-    "devengado": 90045409,
-    "pagado": 0
+    "devengado": 122620768,
+    "pagado": 85136465
   },
   {
     "idObra": 3733,
@@ -11653,7 +11621,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 24260000,
     "devengado": 20236446,
-    "pagado": 0
+    "pagado": 18416578
   },
   {
     "idObra": 3909,
@@ -11701,7 +11669,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 22530000,
     "devengado": 8826163,
-    "pagado": 0
+    "pagado": 7863248
   },
   {
     "idObra": 4191,
@@ -11732,7 +11700,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 967700000,
-    "devengado": 34466200,
+    "devengado": 42078304,
     "pagado": 34466200
   },
   {
@@ -11795,7 +11763,7 @@
     "idObra": 4880,
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
-    "creditoVigente": 72026137000,
+    "creditoVigente": 71147893000,
     "devengado": 35321289,
     "pagado": 35321289
   },
@@ -11844,8 +11812,8 @@
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
     "creditoVigente": 69543000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 39541467,
+    "pagado": 39541467
   },
   {
     "idObra": 5383,
@@ -11892,7 +11860,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 48960000,
-    "devengado": 0,
+    "devengado": 2147158,
     "pagado": 0
   },
   {
@@ -11939,41 +11907,41 @@
     "idObra": 5625,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 117500000,
-    "devengado": 4911383,
-    "pagado": 0
+    "creditoVigente": 162700000,
+    "devengado": 22725660,
+    "pagado": 4911383
   },
   {
     "idObra": 5633,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 2553470000,
+    "creditoVigente": 2556470000,
     "devengado": 193328511,
-    "pagado": 24443569
+    "pagado": 184552958
   },
   {
     "idObra": 5634,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1411700000,
-    "devengado": 147982042,
-    "pagado": 0
+    "devengado": 333601712,
+    "pagado": 168812782
   },
   {
     "idObra": 5635,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1683740000,
-    "devengado": 82957234,
-    "pagado": 0
+    "devengado": 200481522,
+    "pagado": 82957234
   },
   {
     "idObra": 5639,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 197491000,
-    "devengado": 69462093,
-    "pagado": 0
+    "devengado": 73571584,
+    "pagado": 73571584
   },
   {
     "idObra": 5646,
@@ -11997,7 +11965,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 149640000,
     "devengado": 27962634,
-    "pagado": 0
+    "pagado": 27962634
   },
   {
     "idObra": 5659,
@@ -12075,7 +12043,7 @@
     "idObra": 6139,
     "year": 2025,
     "jurisdiccion": "100 - Poder Judicial",
-    "creditoVigente": 1621450000,
+    "creditoVigente": 1639450000,
     "devengado": 90137460,
     "pagado": 90137460
   },
@@ -12092,14 +12060,14 @@
     "year": 2025,
     "jurisdiccion": "100 - Poder Judicial",
     "creditoVigente": 2538940000,
-    "devengado": 388891782,
-    "pagado": 388891782
+    "devengado": 400675272,
+    "pagado": 400675272
   },
   {
     "idObra": 6145,
     "year": 2025,
     "jurisdiccion": "100 - Poder Judicial",
-    "creditoVigente": 2342800000,
+    "creditoVigente": 2377800000,
     "devengado": 43247008,
     "pagado": 43247008
   },
@@ -12132,8 +12100,8 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 36998000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 205703,
+    "pagado": 203814
   },
   {
     "idObra": 6161,
@@ -12148,8 +12116,8 @@
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
     "creditoVigente": 80457000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 65456612,
+    "pagado": 65456612
   },
   {
     "idObra": 6209,
@@ -12163,9 +12131,9 @@
     "idObra": 6211,
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
-    "creditoVigente": 5624010000,
-    "devengado": 1858057087,
-    "pagado": 1858057087
+    "creditoVigente": 6502254000,
+    "devengado": 3636961337,
+    "pagado": 3636961337
   },
   {
     "idObra": 6217,
@@ -12396,24 +12364,24 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1768700000,
-    "devengado": 116110,
-    "pagado": 0
+    "devengado": 232219,
+    "pagado": 105467
   },
   {
     "idObra": 6451,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 781800000,
-    "devengado": 25471058,
-    "pagado": 25471058
+    "devengado": 42948286,
+    "pagado": 40784374
   },
   {
     "idObra": 6453,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 800100000,
-    "devengado": 205989835,
-    "pagado": 205989835
+    "devengado": 263627668,
+    "pagado": 261485456
   },
   {
     "idObra": 6481,
@@ -12428,7 +12396,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 4347100000,
-    "devengado": 7403215,
+    "devengado": 13780932,
     "pagado": 7403215
   },
   {
@@ -12436,15 +12404,15 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 316900000,
-    "devengado": 252766513,
-    "pagado": 210098959
+    "devengado": 258539659,
+    "pagado": 252541024
   },
   {
     "idObra": 6511,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 78340000,
-    "devengado": 82658,
+    "devengado": 146299,
     "pagado": 82658
   },
   {
@@ -12468,24 +12436,24 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1505659000,
-    "devengado": 89551183,
-    "pagado": 47312928
+    "devengado": 131486659,
+    "pagado": 89551183
   },
   {
     "idObra": 6605,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1406514000,
-    "devengado": 284795659,
-    "pagado": 0
+    "devengado": 322273807,
+    "pagado": 310690472
   },
   {
     "idObra": 6613,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1360461000,
-    "devengado": 239950458,
-    "pagado": 239950458
+    "devengado": 342320104,
+    "pagado": 335272751
   },
   {
     "idObra": 6667,
@@ -12565,7 +12533,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 89645000,
     "devengado": 19086248,
-    "pagado": 13956555
+    "pagado": 19086248
   },
   {
     "idObra": 6893,
@@ -12587,8 +12555,8 @@
     "idObra": 6909,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 103490000,
-    "devengado": 0,
+    "creditoVigente": 103579000,
+    "devengado": 103430650,
     "pagado": 0
   },
   {
@@ -12613,7 +12581,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 264850000,
     "devengado": 29704710,
-    "pagado": 0
+    "pagado": 29704710
   },
   {
     "idObra": 6928,
@@ -12627,8 +12595,16 @@
     "idObra": 6941,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 439460000,
-    "devengado": 138829641,
+    "creditoVigente": 542544000,
+    "devengado": 438586568,
+    "pagado": 138829641
+  },
+  {
+    "idObra": 6947,
+    "year": 2025,
+    "jurisdiccion": "65 - Ministerio de Salud",
+    "creditoVigente": 51873000,
+    "devengado": 3109503,
     "pagado": 0
   },
   {
@@ -12644,15 +12620,15 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 95390000,
-    "devengado": 211104,
-    "pagado": 0
+    "devengado": 80480039,
+    "pagado": 80480039
   },
   {
     "idObra": 7077,
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 1045430000,
-    "devengado": 281627963,
+    "devengado": 311003475,
     "pagado": 0
   },
   {
@@ -12732,8 +12708,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 240800000,
-    "devengado": 3125472,
-    "pagado": 0
+    "devengado": 7177396,
+    "pagado": 2703438
   },
   {
     "idObra": 7203,
@@ -12747,9 +12723,9 @@
     "idObra": 7204,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 32900000,
+    "creditoVigente": 200560000,
     "devengado": 15698523,
-    "pagado": 0
+    "pagado": 15698523
   },
   {
     "idObra": 7205,
@@ -12780,7 +12756,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 219400000,
-    "devengado": 309135,
+    "devengado": 1517254,
     "pagado": 309135
   },
   {
@@ -12796,7 +12772,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1747400000,
-    "devengado": 76852753,
+    "devengado": 134400433,
     "pagado": 76852753
   },
   {
@@ -12867,33 +12843,33 @@
     "idObra": 7317,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 273690000,
+    "creditoVigente": 294358000,
     "devengado": 266493626,
-    "pagado": 0
+    "pagado": 266493626
   },
   {
     "idObra": 7319,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 6388800000,
-    "devengado": 1000832891,
-    "pagado": 0
+    "devengado": 2778056251,
+    "pagado": 1000832891
   },
   {
     "idObra": 7325,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 3067210000,
-    "devengado": 1508199267,
-    "pagado": 0
+    "devengado": 2174177335,
+    "pagado": 1508199267
   },
   {
     "idObra": 7334,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 260690000,
-    "devengado": 1495792,
-    "pagado": 0
+    "creditoVigente": 454590000,
+    "devengado": 25274340,
+    "pagado": 25274340
   },
   {
     "idObra": 7336,
@@ -12908,8 +12884,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 244690000,
-    "devengado": 952405,
-    "pagado": 0
+    "devengado": 238559967,
+    "pagado": 238559967
   },
   {
     "idObra": 7355,
@@ -12964,8 +12940,8 @@
     "year": 2025,
     "jurisdiccion": "100 - Poder Judicial",
     "creditoVigente": 7898100000,
-    "devengado": 257926471,
-    "pagado": 257926471
+    "devengado": 531152522,
+    "pagado": 531152522
   },
   {
     "idObra": 7407,
@@ -12988,8 +12964,8 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 881410000,
-    "devengado": 131108243,
-    "pagado": 131108243
+    "devengado": 282410143,
+    "pagado": 266792754
   },
   {
     "idObra": 7442,
@@ -13003,7 +12979,7 @@
     "idObra": 7454,
     "year": 2025,
     "jurisdiccion": "100 - Poder Judicial",
-    "creditoVigente": 880100000,
+    "creditoVigente": 827100000,
     "devengado": 114480420,
     "pagado": 114480420
   },
@@ -13085,7 +13061,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 145920000,
     "devengado": 68333266,
-    "pagado": 0
+    "pagado": 68276356
   },
   {
     "idObra": 7571,
@@ -13099,8 +13075,8 @@
     "idObra": 7575,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 634002000,
-    "devengado": 89741079,
+    "creditoVigente": 694147000,
+    "devengado": 231884182,
     "pagado": 89741079
   },
   {
@@ -13109,55 +13085,55 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 506470000,
     "devengado": 5371529,
-    "pagado": 0
+    "pagado": 5371529
   },
   {
     "idObra": 7579,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 336620000,
-    "devengado": 42342535,
-    "pagado": 0
+    "devengado": 57750887,
+    "pagado": 42342535
   },
   {
     "idObra": 7581,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2638280000,
-    "devengado": 10139041,
-    "pagado": 0
+    "devengado": 81280026,
+    "pagado": 10139041
   },
   {
     "idObra": 7582,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1301720000,
-    "devengado": 133899794,
-    "pagado": 0
+    "devengado": 156064993,
+    "pagado": 153558427
   },
   {
     "idObra": 7583,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 746260000,
-    "devengado": 703165272,
-    "pagado": 703165272
+    "devengado": 734992884,
+    "pagado": 734977720
   },
   {
     "idObra": 7584,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 1675340000,
-    "devengado": 0,
-    "pagado": 0
+    "creditoVigente": 1725340000,
+    "devengado": 168864422,
+    "pagado": 164638379
   },
   {
     "idObra": 7585,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 84280000,
-    "devengado": 0,
-    "pagado": 0
+    "creditoVigente": 120280000,
+    "devengado": 36340716,
+    "pagado": 36340716
   },
   {
     "idObra": 7593,
@@ -13181,14 +13157,14 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2808100000,
     "devengado": 297327,
-    "pagado": 158033
+    "pagado": 281413
   },
   {
     "idObra": 7605,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 19690000,
-    "devengado": 0,
+    "devengado": 8227741,
     "pagado": 0
   },
   {
@@ -13204,7 +13180,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 547790000,
-    "devengado": 324741377,
+    "devengado": 427872945,
     "pagado": 324741377
   },
   {
@@ -13237,7 +13213,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 83761000,
     "devengado": 69614321,
-    "pagado": 0
+    "pagado": 69614321
   },
   {
     "idObra": 7749,
@@ -13245,15 +13221,15 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 22882000,
     "devengado": 13828335,
-    "pagado": 13383161
+    "pagado": 13828335
   },
   {
     "idObra": 7751,
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 522730000,
-    "devengado": 30841422,
-    "pagado": 30235341
+    "devengado": 36864243,
+    "pagado": 36864243
   },
   {
     "idObra": 7753,
@@ -13261,7 +13237,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 180647000,
     "devengado": 1313574,
-    "pagado": 1143263
+    "pagado": 1313574
   },
   {
     "idObra": 7759,
@@ -13269,14 +13245,14 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 641781000,
     "devengado": 63306720,
-    "pagado": 56559954
+    "pagado": 63306720
   },
   {
     "idObra": 7761,
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 410897000,
-    "devengado": 51584,
+    "devengado": 77377,
     "pagado": 51584
   },
   {
@@ -13292,7 +13268,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 347020000,
-    "devengado": 200481679,
+    "devengado": 284379493,
     "pagado": 200481679
   },
   {
@@ -13301,7 +13277,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 588050000,
     "devengado": 395805631,
-    "pagado": 0
+    "pagado": 395805631
   },
   {
     "idObra": 7883,
@@ -13315,9 +13291,9 @@
     "idObra": 7909,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 2783950000,
-    "devengado": 193860882,
-    "pagado": 0
+    "creditoVigente": 2660198000,
+    "devengado": 682860410,
+    "pagado": 193860882
   },
   {
     "idObra": 7911,
@@ -13332,48 +13308,48 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1153246000,
-    "devengado": 11745582,
-    "pagado": 0
+    "devengado": 608023367,
+    "pagado": 11745582
   },
   {
     "idObra": 7921,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2360680000,
-    "devengado": 542486396,
-    "pagado": 0
+    "devengado": 644514578,
+    "pagado": 542486396
   },
   {
     "idObra": 7923,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 3393300000,
-    "devengado": 598977963,
-    "pagado": 0
+    "devengado": 1214485504,
+    "pagado": 598977963
   },
   {
     "idObra": 8132,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 4279884000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 448874518,
+    "pagado": 79612220
   },
   {
     "idObra": 8133,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 2928220000,
-    "devengado": 0,
+    "creditoVigente": 2925220000,
+    "devengado": 116102685,
     "pagado": 0
   },
   {
     "idObra": 8136,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 13497000,
-    "devengado": 0,
-    "pagado": 0
+    "creditoVigente": 123497000,
+    "devengado": 108087293,
+    "pagado": 108087293
   },
   {
     "idObra": 8137,
@@ -13388,14 +13364,14 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 83030000,
-    "devengado": 0,
+    "devengado": 48279873,
     "pagado": 0
   },
   {
     "idObra": 8142,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 63870000,
+    "creditoVigente": 70870000,
     "devengado": 23527904,
     "pagado": 23527904
   },
@@ -13436,15 +13412,15 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2416160000,
-    "devengado": 85570776,
-    "pagado": 0
+    "devengado": 197420374,
+    "pagado": 194463711
   },
   {
     "idObra": 8151,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 198060000,
-    "devengado": 50883082,
+    "devengado": 67132820,
     "pagado": 50883082
   },
   {
@@ -13452,23 +13428,23 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1103078000,
-    "devengado": 281601619,
-    "pagado": 0
+    "devengado": 322638020,
+    "pagado": 316978816
   },
   {
     "idObra": 8157,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 933715000,
-    "devengado": 70669408,
-    "pagado": 0
+    "devengado": 79118329,
+    "pagado": 15437581
   },
   {
     "idObra": 8159,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 970575000,
-    "devengado": 0,
+    "devengado": 203629363,
     "pagado": 0
   },
   {
@@ -13476,23 +13452,23 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1441538000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 159308741,
+    "pagado": 147787579
   },
   {
     "idObra": 8223,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1179919000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 39623680,
+    "pagado": 35776714
   },
   {
     "idObra": 8225,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1196430000,
-    "devengado": 91983824,
+    "devengado": 193394704,
     "pagado": 0
   },
   {
@@ -13624,14 +13600,6 @@
     "pagado": 0
   },
   {
-    "idObra": 8381,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 308344000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
     "idObra": 8387,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
@@ -13656,14 +13624,6 @@
     "pagado": 0
   },
   {
-    "idObra": 8393,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 157385000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
     "idObra": 8397,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
@@ -13675,15 +13635,7 @@
     "idObra": 8398,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 234549000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 8399,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 314770000,
+    "creditoVigente": 134549000,
     "devengado": 0,
     "pagado": 0
   },
@@ -13708,16 +13660,16 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 330586000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 36123381,
+    "pagado": 36123381
   },
   {
     "idObra": 8447,
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 294435000,
-    "devengado": 8223093,
-    "pagado": 8069235
+    "devengado": 43813565,
+    "pagado": 43813565
   },
   {
     "idObra": 8453,
@@ -13748,8 +13700,8 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 315415000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 100802389,
+    "pagado": 31476832
   },
   {
     "idObra": 8605,
@@ -13757,7 +13709,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 157524000,
     "devengado": 84053441,
-    "pagado": 82376402
+    "pagado": 84053441
   },
   {
     "idObra": 8607,
@@ -13772,15 +13724,15 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 210075000,
-    "devengado": 65467044,
-    "pagado": 63200040
+    "devengado": 137900613,
+    "pagado": 87900613
   },
   {
     "idObra": 8947,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 342600000,
-    "devengado": 37289064,
+    "devengado": 98142468,
     "pagado": 37289064
   },
   {
@@ -13789,7 +13741,7 @@
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 443464000,
     "devengado": 206640877,
-    "pagado": 204039070
+    "pagado": 206640877
   },
   {
     "idObra": 8961,
@@ -13804,7 +13756,7 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 643006000,
-    "devengado": 308351453,
+    "devengado": 353875672,
     "pagado": 0
   },
   {
@@ -13836,16 +13788,16 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 281130000,
-    "devengado": 46076140,
-    "pagado": 46076140
+    "devengado": 73977825,
+    "pagado": 73241272
   },
   {
     "idObra": 8993,
     "year": 2025,
     "jurisdiccion": "35 - Servicio Penitenciario",
     "creditoVigente": 1050000000,
-    "devengado": 11680476,
-    "pagado": 11197710
+    "devengado": 16235614,
+    "pagado": 16235614
   },
   {
     "idObra": 9001,
@@ -13860,16 +13812,16 @@
     "year": 2025,
     "jurisdiccion": "35 - Servicio Penitenciario",
     "creditoVigente": 1617422000,
-    "devengado": 59770844,
-    "pagado": 39107198
+    "devengado": 63736515,
+    "pagado": 61899524
   },
   {
     "idObra": 9011,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1340320000,
-    "devengado": 194629430,
-    "pagado": 0
+    "devengado": 224793121,
+    "pagado": 194629430
   },
   {
     "idObra": 9015,
@@ -13893,7 +13845,7 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 680200000,
     "devengado": 135894607,
-    "pagado": 0
+    "pagado": 130842019
   },
   {
     "idObra": 9027,
@@ -13908,7 +13860,7 @@
     "year": 2025,
     "jurisdiccion": "192 - Ministerio De Desarrollo Social Y Promoción Del Empleo",
     "creditoVigente": 294279000,
-    "devengado": 43496800,
+    "devengado": 48713600,
     "pagado": 43496800
   },
   {
@@ -13916,7 +13868,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 147960000,
-    "devengado": 26029858,
+    "devengado": 40398056,
     "pagado": 26029858
   },
   {
@@ -14036,7 +13988,7 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 214750000,
-    "devengado": 12439304,
+    "devengado": 15137280,
     "pagado": 12439304
   },
   {
@@ -14096,26 +14048,10 @@
     "pagado": 0
   },
   {
-    "idObra": 9171,
-    "year": 2025,
-    "jurisdiccion": "196 - Ministerio De Producción, Ciencia E Innovación Tecnológica",
-    "creditoVigente": 46250000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
     "idObra": 9173,
     "year": 2025,
     "jurisdiccion": "196 - Ministerio De Producción, Ciencia E Innovación Tecnológica",
     "creditoVigente": 39800000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 9175,
-    "year": 2025,
-    "jurisdiccion": "196 - Ministerio De Producción, Ciencia E Innovación Tecnológica",
-    "creditoVigente": 40200000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14173,47 +14109,47 @@
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 9030000000,
     "devengado": 4387178,
-    "pagado": 0
+    "pagado": 4387178
   },
   {
     "idObra": 9451,
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 9848903000,
-    "devengado": 72701067,
-    "pagado": 13414988
+    "devengado": 556956883,
+    "pagado": 70311098
   },
   {
     "idObra": 9469,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 278470000,
-    "devengado": 43158887,
-    "pagado": 0
+    "devengado": 44386048,
+    "pagado": 44248543
   },
   {
     "idObra": 9497,
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 2665000000,
-    "devengado": 120600014,
-    "pagado": 0
+    "devengado": 160523937,
+    "pagado": 160523937
   },
   {
     "idObra": 9499,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1703036000,
-    "devengado": 299801363,
-    "pagado": 0
+    "devengado": 316325373,
+    "pagado": 307962430
   },
   {
     "idObra": 9501,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1033640000,
-    "devengado": 8540716,
-    "pagado": 0
+    "devengado": 13825975,
+    "pagado": 8540716
   },
   {
     "idObra": 9507,
@@ -14228,8 +14164,8 @@
     "year": 2025,
     "jurisdiccion": "60 - Ministerio de Educacion",
     "creditoVigente": 12500000000,
-    "devengado": 1573040944,
-    "pagado": 1438530438
+    "devengado": 1577251668,
+    "pagado": 1573040944
   },
   {
     "idObra": 9549,
@@ -14291,7 +14227,7 @@
     "idObra": 9701,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 534980000,
+    "creditoVigente": 217107000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14323,7 +14259,7 @@
     "idObra": 9709,
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 514257000,
+    "creditoVigente": 12155000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14340,14 +14276,6 @@
     "year": 2025,
     "jurisdiccion": "65 - Ministerio de Salud",
     "creditoVigente": 195903000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 9717,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 118046000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14379,23 +14307,7 @@
     "idObra": 9728,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 93280000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 9731,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 159832000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
-    "idObra": 9733,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 116155000,
+    "creditoVigente": 493280000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14520,14 +14432,6 @@
     "pagado": 0
   },
   {
-    "idObra": 9775,
-    "year": 2025,
-    "jurisdiccion": "65 - Ministerio de Salud",
-    "creditoVigente": 198626000,
-    "devengado": 0,
-    "pagado": 0
-  },
-  {
     "idObra": 9777,
     "year": 2025,
     "jurisdiccion": "176 - Ministerio De Bioagroindustria",
@@ -14563,7 +14467,7 @@
     "idObra": 9940,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 6356531000,
+    "creditoVigente": 6102397000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14587,7 +14491,7 @@
     "idObra": 10041,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 1269622000,
+    "creditoVigente": 1262622000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14596,48 +14500,48 @@
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2199748000,
-    "devengado": 132599221,
-    "pagado": 79599054
+    "devengado": 280502433,
+    "pagado": 263770422
   },
   {
     "idObra": 10045,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2350660000,
-    "devengado": 550210710,
-    "pagado": 550210710
+    "devengado": 667521593,
+    "pagado": 664420500
   },
   {
     "idObra": 10047,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 2270555000,
-    "devengado": 159152800,
-    "pagado": 0
+    "devengado": 247509840,
+    "pagado": 119936456
   },
   {
     "idObra": 10049,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 911217000,
-    "devengado": 63971360,
-    "pagado": 45233497
+    "devengado": 158182142,
+    "pagado": 63971360
   },
   {
     "idObra": 10051,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 904741000,
-    "devengado": 92891784,
-    "pagado": 45569978
+    "devengado": 183337372,
+    "pagado": 180946766
   },
   {
     "idObra": 10053,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 1948365000,
-    "devengado": 334506381,
-    "pagado": 34531346
+    "devengado": 391896025,
+    "pagado": 342305141
   },
   {
     "idObra": 10059,
@@ -14699,9 +14603,9 @@
     "idObra": 10133,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 43000000,
-    "devengado": 0,
-    "pagado": 0
+    "creditoVigente": 128600000,
+    "devengado": 82868828,
+    "pagado": 81155049
   },
   {
     "idObra": 10135,
@@ -14725,15 +14629,15 @@
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 25000000,
     "devengado": 13973229,
-    "pagado": 0
+    "pagado": 12241652
   },
   {
     "idObra": 10139,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
     "creditoVigente": 195000000,
-    "devengado": 0,
-    "pagado": 0
+    "devengado": 29997,
+    "pagado": 29997
   },
   {
     "idObra": 10140,
@@ -14819,7 +14723,7 @@
     "idObra": 10157,
     "year": 2025,
     "jurisdiccion": "75 - Ministerio De Infraestructura Y Servicios Públicos",
-    "creditoVigente": 16386570000,
+    "creditoVigente": 15577770000,
     "devengado": 0,
     "pagado": 0
   },
@@ -14926,5 +14830,13 @@
     "creditoVigente": 705053000,
     "devengado": 0,
     "pagado": 0
+  },
+  {
+    "idObra": 10243,
+    "year": 2025,
+    "jurisdiccion": "196 - Ministerio De Producción, Ciencia E Innovación Tecnológica",
+    "creditoVigente": 86450000,
+    "devengado": 30251687,
+    "pagado": 26268883
   }
 ]
