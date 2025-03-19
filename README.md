@@ -1,7 +1,7 @@
 # Departamento de Eficiencia Gubernamental de Córdoba (DEGC)
 
 ## Descripción
-El DEGC es una plataforma de transparencia gubernamental que permite a los ciudadanos de Córdoba monitorear y analizar los gastos públicos en tiempo real, con un enfoque inicial en los sueldos de funcionarios públicos.
+El DEGC es una plataforma de transparencia gubernamental que permite a los ciudadanos de Córdoba monitorear y analizar los gastos públicos en tiempo real, con un enfoque inicial en los sueldos de funcionarios públicos y ejecuciones presupuestarias (obras etc) de cada jurisidicción.
 
 ## Características Principales
 - 📊 Visualización de gastos en sueldos públicos
