@@ -5,7 +5,7 @@ import executionsData from "../data/executions.json" assert { type: "json" }; //
 
 async function fetchAndStoreExecutionDetails() {
   const maxAttempts = 3;
-  const rowsPerPage = 2000;
+  const rowsPerPage = 3000;
   let allDetails = [];
 
   // Usar los idObra y años de executions.json
@@ -16,7 +16,7 @@ async function fetchAndStoreExecutionDetails() {
 
   for (const { idObra, year } of obraEntries) {
     if (!idObra) continue; // Saltar si no hay idObra
-    const codedYear = 200 + (year - 2023) + 6; // 206 = 2023, 207 = 2024, 208 = 2025
+    const codedYear = 206 + (year - 2023); // 206 = 2023, 207 = 2024, 208 = 2025
     let page = 1;
     let hasMoreData = true;
 
@@ -109,3 +109,4 @@ process.on("SIGTERM", () => {
 });
 
 fetchAndStoreExecutionDetails();
+

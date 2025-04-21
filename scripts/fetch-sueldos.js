@@ -6,7 +6,7 @@ async function fetchAndStoreSueldos() {
   const startYear = 2023;
   const startMonth = 1; // Enero 2024
   const endYear = 2025;
-  const endMonth = 2; // Enero 2025
+  const endMonth = 4; // Enero 2025
   const maxAttempts = 3;
   let allData = [];
 

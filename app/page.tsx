@@ -22,14 +22,24 @@ interface SpendingDataItem {
 }
 
 interface ExecutionDataItem {
+ 
   obra: string;
-  idObra: number | null;
+  idObra: number ;
   programa: string;
   jurisdiccion: string;
   objetoGasto: string;
   beneficiario: string;
   monto: number;
   year: number;
+}
+
+interface ExecutionDetailItem {
+  idObra: number;
+  year: number;
+  jurisdiccion: string;
+  creditoVigente: number;
+  devengado: number;
+  pagado: number;
 }
 
 interface TweetPost {
@@ -79,7 +89,7 @@ export default function Home() {
         // Create a map of execution details by idObra for faster lookup
         const detailsMap = new Map();
         executionDetailsData.forEach(detail => {
-          detailsMap.set(detail.idObra, detail);
+          detailsMap.set((detail as ExecutionDetailItem).idObra, detail);
         });
         
         executionsData.forEach(item => {
@@ -264,6 +274,4 @@ export default function Home() {
   );
 }
 
-function handleUserInteraction(this: Document, ev: MouseEvent) {
-  throw new Error("Function not implemented.");
-}
+

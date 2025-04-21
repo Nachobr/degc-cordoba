@@ -5,11 +5,11 @@ async function fetchAndStoreExecutions() {
   const startYear = 2023;
   const endYear = 2025;
   const maxAttempts = 3;
-  const rowsPerPage = 2000;
+  const rowsPerPage = 3000;
   let allData = [];
 
   for (let year = startYear; year <= endYear; year++) {
-    const codedYear = 200 + (year - 2023) + 6; // 206 = 2023, 207 = 2024, 208 = 2025
+    const codedYear = 206 + (year - 2023); // 206 = 2023, 207 = 2024, 208 = 2025
     let page = 1;
     let hasMoreData = true;
 
